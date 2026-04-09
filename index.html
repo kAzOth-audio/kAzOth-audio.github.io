@@ -79,5 +79,28 @@
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <script>
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    const links = document.querySelectorAll('a, .card, iframe');
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        follower.style.left = (e.clientX - 8) + 'px';
+        follower.style.top = (e.clientY - 8) + 'px';
+    });
+
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            follower.classList.add('cursor-active');
+        });
+        link.addEventListener('mouseleave', () => {
+            follower.classList.remove('cursor-active');
+        });
+    });
+</script>
+
 </body>
 </html>
