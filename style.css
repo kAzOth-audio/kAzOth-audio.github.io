@@ -84,8 +84,9 @@ main {
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
-}
 
+    
+/* --- SECTION RESEAUX SOCIAUX --- */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -101,15 +102,29 @@ main {
     transition: all 0.2s ease;
 }
 
-.card i { font-size: 1.4rem; color: #444; transition: 0.2s; }
+/* On prépare l'icône pour l'animation */
+.card i { 
+    font-size: 1.4rem; 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
 
 /* Couleurs officielles des logos (icônes) */
 .card.bandcamp i { color: #629aa9; }
 .card.youtube i { color: #ff0000; }
 .card.facebook i { color: #1877f2; }
 .card.tiktok i { color: #ff0050; }
-.card.hearthis i { color: #00f2ff; }
-.card.audiocom i { color: #f2f2f2; } /* Blanc brillant officiel pour Audio.com */
+.card.hearthis i { color: #ff5500; }
+.card.audiocom i { color: #f2f2f2; }
+
+/* Animation au survol : la case bouge ET le logo s'anime */
+.card:hover { 
+    transform: translateX(5px); 
+}
+
+.card:hover i {
+    transform: scale(1.3); 
+    filter: drop-shadow(0 0 8px currentColor); 
+}
 
 footer {
     width: 100%;
