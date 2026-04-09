@@ -126,3 +126,39 @@ footer a { color: var(--accent); text-decoration: none; font-weight: bold; }
     .social-grid { grid-template-columns: 1fr 1fr; }
     .hero h1 { font-size: 6.5rem; }
 }
+
+
+/* Désactive le curseur par défaut sur tout le site */
+html, body, a, button {
+    cursor: none !important;
+}
+
+/* Le point central */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+}
+
+/* Le cercle qui suit avec un léger retard */
+.cursor-follower {
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease-out, background 0.3s ease;
+}
+
+/* Animation quand on survole un lien ou une carte */
+.cursor-active {
+    transform: scale(2.5);
+    background: rgba(0, 242, 255, 0.1);
+}
