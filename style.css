@@ -23,7 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('https://kazoth-audio.github.io/banniere'); /* Extension corrigée en .png */
+    background-image: url('banniere.png'); /* Extension corrigée en .png */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
