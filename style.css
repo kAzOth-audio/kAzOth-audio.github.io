@@ -1,150 +1,157 @@
 :root {
-    --bg: #000000;
-    --card-bg: #050505;
-    --border: #151515;
-    --text: #ffffff;
-    --accent: #00f2ff; /* Cyan KAZOTH */
-    --dim: #444;
+    --bg: #050505;
+    --text: #e0e0e0;
+    --dim: #555555;
+    --border: #222222;
+    --accent: #ffffff; /* On passe sur du blanc pur pour plus de dureté */
 }
+
+* { box-sizing: border-box; }
 
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     margin: 0;
-    padding: 0;
-    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* HEADER : Impact Typographique */
-.hero {
-    width: 100%;
-    padding: 100px 0 60px;
+/* Effet de grain (noise) pour le côté "sale/indus" */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* HEADER MASSIF */
+.industrial-header {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
     text-align: center;
 }
 
-.hero h1 {
-    font-family: 'Syncopate', sans-serif;
-    font-size: clamp(2.5rem, 10vw, 6rem);
-    font-weight: 700;
+h1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: clamp(4rem, 15vw, 10rem);
+    line-height: 0.8;
     margin: 0;
     letter-spacing: -2px;
-    text-transform: uppercase;
-    color: #fff;
-    /* Effet néon plus diffus */
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.4), 0 0 30px rgba(0, 242, 255, 0.2);
-}
-
-.subtitle {
-    font-family: 'Inter', sans-serif;
     color: var(--accent);
-    letter-spacing: 10px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    margin-top: 15px;
-    text-transform: uppercase;
-    opacity: 0.8;
 }
 
-/* CONTAINER & CATÉGORIES */
-.container {
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.category-block {
-    margin-bottom: 80px;
-}
-
-.category-title {
-    font-family: 'Syncopate', sans-serif;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+.status-line {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
     color: var(--dim);
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
+    margin-top: 20px;
 }
 
-/* Séparateur horizontal discret */
-.category-title::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    margin-left: 20px;
+/* GRILLE ET MODULES */
+.content-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 20px;
 }
 
-/* MÉDIAS */
-.iframe-container {
-    background: var(--card-bg);
+.module {
+    margin-bottom: 100px;
+}
+
+.module-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dim);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.module-label span {
+    color: var(--accent);
+    margin-right: 10px;
+}
+
+.module-body {
+    background: #080808;
     border: 1px solid var(--border);
-    border-radius: 2px; /* Angles plus vifs pour l'indus */
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
-.video-wrapper {
+/* VIDEO */
+.video-container {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
 }
-.video-wrapper iframe {
+.video-container iframe {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
 }
 
-/* GRILLE SOCIALE ÉPURÉE */
-.social-grid {
+/* NODES (LIENS) */
+.nodes-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
-.card {
-    background: var(--card-bg);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px; /* Crée les lignes de séparation */
+    background: var(--border);
     border: 1px solid var(--border);
-    padding: 20px 25px;
-    text-decoration: none;
+}
+
+.node {
+    background: var(--bg);
     color: var(--text);
-    font-weight: 900;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.card i { font-size: 1.2rem; color: var(--dim); transition: 0.3s; }
-
-.card:hover {
-    background: #0a0a0a;
-    border-color: var(--accent);
-    transform: translateX(8px);
-}
-
-.card:hover i { color: var(--accent); }
-
-/* FOOTER */
-footer {
-    padding: 100px 0;
+    text-decoration: none;
+    padding: 30px 20px;
     text-align: center;
-    border-top: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
 }
 
-footer p {
+.node:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+/* CONTACT */
+.contact-info {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact-info p {
     font-size: 0.7rem;
     color: var(--dim);
+    margin-bottom: 10px;
+}
+
+.email-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-family: 'Big Shoulders Display', sans-serif;
     letter-spacing: 2px;
 }
 
-footer a { color: var(--text); text-decoration: none; font-weight: bold; }
-footer a:hover { color: var(--accent); }
+.email-link:hover {
+    text-decoration: underline;
+}
 
-/* RESPONSIVE */
-@media (min-width: 600px) {
-    .social-grid { grid-template-columns: 1fr 1fr; }
-    .hero { padding: 150px 0 80px; }
+/* FOOTER */
+.industrial-footer {
+    padding: 100px 20px;
+    text-align: center;
+    font-size: 0.6rem;
+    color: var(--dim);
+    letter-spacing: 3px;
+}
+
+@media (max-width: 600px) {
+    .nodes-grid { grid-template-columns: 1fr; }
 }
