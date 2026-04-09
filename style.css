@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #030303;
+    --bg-dark: #020202; /* Fond encore plus noir pour faire ressortir le cyan */
     --bg-panel: #0c0c0c;
     --accent-cyan: #00f2ff;
     --text-main: #ffffff;
@@ -17,29 +17,36 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Header & Logo --- */
+/* --- Header BANNIERE (Couleurs et Glow mis à jour) --- */
 .hero {
     width: 100%;
-    padding: 30px 0 60px;
+    padding: 60px 0 80px;
     text-align: center;
-    background: radial-gradient(circle, #0a1a1c 0%, #030303 100%);
+    /* Nouveau fond : Noir profond avec un dégradé radial cyan très sombre */
+    background: radial-gradient(circle, rgba(1, 26, 30, 1) 0%, rgba(2, 2, 2, 1) 80%);
 }
 
 .main-logo {
     max-width: 850px;
     width: 95%;
     height: auto;
-    filter: drop-shadow(0 0 25px rgba(0, 242, 255, 0.15));
+    /* PUISSANT GLOW CYAN : Le logo brille comme un néon */
+    filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 242, 255, 0.25));
 }
 
 .subtitle {
     color: var(--accent-cyan);
-    letter-spacing: 12px;
-    font-size: 0.9rem;
+    letter-spacing: 5px; /* Légèrement réduit pour la lisibilité */
+    font-size: 0.8rem;
     font-weight: 900;
-    margin-top: -15px;
+    margin-top: -30px; /* Aligné sous les dents du logo */
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+    /* Effet néon sur le texte */
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.6), 0 0 20px rgba(0, 242, 255, 0.4);
+    background-color: #011417; /* Un fond très sombre sous le texte pour le décoller de la bannière */
+    padding: 8px 15px;
+    display: inline-block;
+    border-radius: 4px;
 }
 
 /* --- Layout Grid --- */
@@ -49,7 +56,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .ui-tab {
@@ -65,17 +72,17 @@ body {
     border-radius: 4px 4px 0 0;
 }
 
-/* --- Lecteur (Correction fond noir) --- */
+/* --- Lecteur --- */
 .iframe-container {
     border: 1px solid var(--border-tech);
-    background: #000; /* Force le fond noir sous le lecteur */
+    background: #000;
     line-height: 0;
     overflow: hidden;
 }
 
 .neon-glow:hover {
     border-color: var(--accent-cyan);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.25);
 }
 
 /* --- Social Cards --- */
@@ -113,7 +120,7 @@ body {
 .social-card:hover {
     border-color: var(--accent-cyan);
     background: #111;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 .social-card:hover i {
@@ -127,7 +134,7 @@ body {
     font-size: 0.75rem;
     color: #444;
     text-align: center;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 .contact-footer a { color: var(--accent-cyan); text-decoration: none; font-weight: bold; }
