@@ -10,9 +10,7 @@
 </head>
 <body>
 
-    <div class="translation-bar">
-        <div id="google_translate_element"></div>
-    </div>
+    <div id="google_translate_element" style="position: absolute; top: 10px; right: 10px; z-index: 100;"></div>
 
     <header class="hero">
         <div class="overlay"></div>
@@ -23,8 +21,15 @@
     </header>
 
     <main>
-        <div class="section-label">LATEST TRANSMISSION</div>
-        <section class="player-section">
+        <h2 class="category-title">Visual Transmission</h2>
+        <section class="media-section">
+            <div class="iframe-container">
+                <iframe width="100%" height="450" src="https://www.youtube.com/embed/8PG440tkycY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <h2 class="category-title">Audio Archive</h2>
+        <section class="media-section">
             <div class="iframe-container">
                 <iframe 
                     style="border:none; border-radius: 8px;" 
@@ -32,14 +37,14 @@
                     id="hearthis_at_user_kazoth" 
                     width="100%" 
                     height="350" 
-                    src="https://app.hearthis.at/kazoth/embed/?hcolor=00f2ff&css=&skin=black" 
+                    src="https://hearthis.at/kazoth/embed/?hcolor=00f2ff&skin=black&background=0" 
                     frameborder="0" 
                     allowtransparency>
                 </iframe>
             </div>
         </section>
 
-        <div class="section-label">SOCIAL CONNECT</div>
+        <h2 class="category-title">Connect Nodes</h2>
         <nav class="social-grid">
             <a href="https://kazoth.bandcamp.com" target="_blank" class="card bandcamp">
                 <i class="fab fa-bandcamp"></i>
@@ -69,12 +74,12 @@
     </main>
 
     <footer>
-        <p>BOOKING & CONTACT : <a href="mailto:the.kAzOth@gmail.com">THE.KAZOTH@GMAIL.COM</a></p>
+        <p>Booking & Contact : <a href="mailto:the.kAzOth@gmail.com">the.kAzOth@gmail.com</a></p>
     </footer>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
