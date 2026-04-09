@@ -2,7 +2,7 @@
     --bg: #030303;
     --card-bg: #111;
     --text: #ffffff;
-    --accent: #00f2ff;
+    --accent: #00f2ff; /* Cyan kAzOth */
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     align-items: center;
 }
 
-/* BANNIÈRE AVEC URL ABSOLUE */
+/* Configuration de la bannière avec ton image PNG */
 .hero {
     width: 100%;
     height: 50vh;
@@ -23,18 +23,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('https://kazoth-audio.github.io/banniere.png');
+    background-image: url('banniere.png'); /* Extension corrigée en .png */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 30px;
-    border-bottom: 2px solid var(--accent);
 }
 
 .hero .overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5); /* Assombrit l'image pour lire le texte */
 }
 
 .hero-content {
@@ -49,7 +48,7 @@ body {
     letter-spacing: -3px;
     margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
 }
 
 .subtitle {
@@ -66,39 +65,17 @@ main {
     padding-bottom: 60px;
 }
 
-.content-section {
+.player-section {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
-.section-title {
-    font-size: 1rem;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-/* CONTENEURS MÉDIAS */
-.iframe-container, .video-container {
+.iframe-container {
     border-radius: 8px;
     overflow: hidden;
-    background: var(--card-bg);
     border: 1px solid #222;
 }
 
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* Ratio 16:9 */
-    height: 0;
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-
-/* GRILLE SOCIALE */
 .social-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -116,27 +93,32 @@ main {
     align-items: center;
     gap: 15px;
     border-radius: 4px;
-    transition: 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.card i { font-size: 1.5rem; width: 30px; text-align: center; }
+.card i { font-size: 1.5rem; }
 
-.card:hover { transform: translateX(5px); background: #1a1a1a; }
-.card.bandcamp:hover { border-color: #629aa9; color: #629aa9; }
-.card.youtube:hover { border-color: #ff0000; color: #ff0000; }
-.card.facebook:hover { border-color: #1877f2; color: #1877f2; }
-.card.hearthis:hover, .card.audiocom:hover { border-color: var(--accent); color: var(--accent); }
+/* Effet de glissement au survol */
+.card:hover { transform: translateX(5px); }
+
+/* Couleurs de bordures au survol par réseau */
+.card.bandcamp:hover { border-color: #629aa9; }
+.card.youtube:hover { border-color: #ff0000; }
+.card.facebook:hover { border-color: #1877f2; }
+.card.hearthis:hover, .card.audiocom:hover { border-color: var(--accent); }
 
 footer {
     width: 100%;
     text-align: center;
-    padding: 50px 0;
+    padding: 40px 0;
     font-size: 0.8rem;
-    color: #444;
+    color: #555;
+    border-top: 1px solid #111;
 }
 
 footer a { color: var(--accent); text-decoration: none; }
 
+/* Adaptation pour les écrans d'ordinateurs */
 @media (min-width: 600px) {
     .social-grid { grid-template-columns: 1fr 1fr; }
     .hero h1 { font-size: 6rem; }
