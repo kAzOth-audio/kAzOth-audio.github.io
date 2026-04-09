@@ -1,9 +1,8 @@
 :root {
-    --bg: #050505;
-    --text: #e0e0e0;
-    --dim: #555555;
-    --border: #222222;
-    --accent: #ffffff; /* On passe sur du blanc pur pour plus de dureté */
+    --bg: #000000;
+    --text: #ffffff;
+    --border: #1a1a1a;
+    --hover: #222222;
 }
 
 * { box-sizing: border-box; }
@@ -11,147 +10,109 @@
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    overflow-x: hidden;
-}
-
-/* Effet de grain (noise) pour le côté "sale/indus" */
-.noise-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 999;
-}
-
-/* HEADER MASSIF */
-.industrial-header {
-    height: 60vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+}
+
+header {
+    margin-top: 80px;
+    margin-bottom: 60px;
     text-align: center;
+    width: 100%;
+    max-width: 800px;
 }
 
 h1 {
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: clamp(4rem, 15vw, 10rem);
-    line-height: 0.8;
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: -4px;
     margin: 0;
-    letter-spacing: -2px;
-    color: var(--accent);
+    text-transform: uppercase;
 }
 
-.status-line {
-    font-size: 0.7rem;
-    letter-spacing: 5px;
-    color: var(--dim);
-    margin-top: 20px;
+.line {
+    height: 1px;
+    background: var(--text);
+    width: 40px;
+    margin: 20px auto;
 }
 
-/* GRILLE ET MODULES */
-.content-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 80px 20px;
+main {
+    width: 100%;
+    max-width: 800px;
 }
 
-.module {
-    margin-bottom: 100px;
-}
-
-.module-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--dim);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-}
-
-.module-label span {
-    color: var(--accent);
-    margin-right: 10px;
-}
-
-.module-body {
-    background: #080808;
+.media-block {
+    margin-bottom: 20px;
     border: 1px solid var(--border);
+    background: #050505;
 }
 
-/* VIDEO */
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
 }
+
 .video-container iframe {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
 }
 
-/* NODES (LIENS) */
-.nodes-grid {
+/* LINKS GRID : Propre et ordonné */
+.links-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1px; /* Crée les lignes de séparation */
-    background: var(--border);
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.links-grid a {
     border: 1px solid var(--border);
-}
-
-.node {
-    background: var(--bg);
-    color: var(--text);
-    text-decoration: none;
-    padding: 30px 20px;
+    padding: 25px;
     text-align: center;
-    font-weight: 700;
-    font-size: 0.8rem;
-    transition: all 0.2s ease;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    transition: 0.2s ease;
 }
 
-.node:hover {
-    background: var(--accent);
-    color: #000;
+.links-grid a:hover {
+    background: var(--text);
+    color: var(--bg);
 }
 
 /* CONTACT */
-.contact-info {
-    padding: 60px 20px;
+.contact-area {
+    margin-top: 60px;
     text-align: center;
 }
 
-.contact-info p {
-    font-size: 0.7rem;
-    color: var(--dim);
-    margin-bottom: 10px;
-}
-
-.email-link {
-    color: var(--accent);
+.contact-area a {
+    color: var(--text);
     text-decoration: none;
-    font-size: 1.5rem;
     font-weight: 900;
-    font-family: 'Big Shoulders Display', sans-serif;
-    letter-spacing: 2px;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 5px;
 }
 
-.email-link:hover {
-    text-decoration: underline;
-}
-
-/* FOOTER */
-.industrial-footer {
-    padding: 100px 20px;
-    text-align: center;
+footer {
+    padding: 100px 0 40px;
     font-size: 0.6rem;
-    color: var(--dim);
-    letter-spacing: 3px;
+    letter-spacing: 2px;
+    opacity: 0.3;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-    .nodes-grid { grid-template-columns: 1fr; }
+    .links-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 3rem; }
 }
