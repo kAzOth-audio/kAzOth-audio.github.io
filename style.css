@@ -2,7 +2,6 @@
     --bg-dark: #030303;
     --bg-panel: #0c0c0c;
     --accent-cyan: #00f2ff;
-    --accent-orange: #ff5500;
     --text-main: #ffffff;
     --border-tech: #1a1a1a;
 }
@@ -15,21 +14,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 /* --- Header & Logo --- */
 .hero {
     width: 100%;
-    padding: 40px 0;
+    padding: 30px 0 60px;
     text-align: center;
     background: radial-gradient(circle, #0a1a1c 0%, #030303 100%);
 }
 
 .main-logo {
-    max-width: 800px; /* Plus large pour ton nouveau logo haute qualité */
+    max-width: 850px;
     width: 95%;
     height: auto;
-    filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.25));
+    filter: drop-shadow(0 0 25px rgba(0, 242, 255, 0.15));
 }
 
 .subtitle {
@@ -37,51 +37,48 @@ body {
     letter-spacing: 12px;
     font-size: 0.9rem;
     font-weight: 900;
-    margin-top: -30px;
+    margin-top: -15px;
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
 }
 
-/* --- Layout --- */
+/* --- Layout Grid --- */
 .ui-grid {
     width: 92%;
     max-width: 1200px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
-    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 .ui-tab {
     font-size: 0.65rem;
     font-weight: 900;
     letter-spacing: 3px;
-    color: #666;
+    color: #555;
     background: #080808;
     padding: 10px 20px;
     border: 1px solid var(--border-tech);
     border-bottom: none;
-    display: inline-block;
     text-transform: uppercase;
     border-radius: 4px 4px 0 0;
 }
 
-/* --- Lecteur Néon --- */
+/* --- Lecteur (Correction fond noir) --- */
 .iframe-container {
     border: 1px solid var(--border-tech);
-    border-radius: 0 4px 4px 4px;
+    background: #000; /* Force le fond noir sous le lecteur */
+    line-height: 0;
     overflow: hidden;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: #000;
 }
 
-.iframe-container:hover {
+.neon-glow:hover {
     border-color: var(--accent-cyan);
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-    transform: scale(1.01);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
 }
 
-/* --- Social Grid --- */
+/* --- Social Cards --- */
 .social-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -103,24 +100,24 @@ body {
     transition: all 0.3s ease;
 }
 
-.social-card i { font-size: 1.4rem; color: #444; transition: 0.3s; }
+.social-card i { font-size: 1.4rem; transition: 0.3s; }
+
+/* Couleurs icônes d'origine */
+.bandcamp i { color: #629aa9; }
+.youtube i { color: #ff0000; }
+.hearthis i { color: #ff5500; }
+.audiocom i { color: #f2f2f2; }
+.facebook i { color: #1877f2; }
+.tiktok i { color: #ff0050; }
 
 .social-card:hover {
-    background: #111;
     border-color: var(--accent-cyan);
-    transform: translateX(5px);
+    background: #111;
+    transform: translateY(-2px);
 }
-
-.social-card.has-glow {
-    border-color: rgba(0, 242, 255, 0.2);
-}
-
-.social-card.has-glow i { color: var(--accent-cyan); }
-
-.social-card.orange-glow i { color: var(--accent-orange); }
 
 .social-card:hover i {
-    transform: scale(1.2) rotate(5deg);
+    transform: scale(1.2);
     filter: drop-shadow(0 0 8px currentColor);
 }
 
@@ -129,21 +126,13 @@ body {
     padding: 80px 0;
     font-size: 0.75rem;
     color: #444;
-    letter-spacing: 2px;
     text-align: center;
+    letter-spacing: 1px;
 }
 
-.contact-footer a { 
-    color: var(--accent-cyan); 
-    text-decoration: none; 
-    font-weight: bold;
-    transition: 0.3s;
-}
+.contact-footer a { color: var(--accent-cyan); text-decoration: none; font-weight: bold; }
 
-.contact-footer a:hover {
-    text-shadow: 0 0 10px var(--accent-cyan);
-}
-
+/* Desktop View */
 @media (min-width: 900px) {
     .ui-grid { grid-template-columns: 1.6fr 1fr; }
 }
