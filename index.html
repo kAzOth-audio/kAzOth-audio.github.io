@@ -3,43 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAZOTH | OFFICIAL</title>
+    <title>KAZOTH | DJ & Producer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="header">
-        <h1>KAZOTH</h1>
-        <p class="subtitle">DJ & PRODUCER</p>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>KAZOTH</h1>
+            <p class="subtitle">DJ & PRODUCER</p>
+        </div>
     </header>
 
-    <main class="container">
-        
-        <section class="section">
-            <div class="media-box video">
-                <iframe src="https://www.youtube.com/embed/8PG440tkycY" frameborder="0" allowfullscreen></iframe>
+    <main>
+        <section class="player-section">
+            <div class="iframe-container video-wrapper">
+                <iframe 
+                    width="100%" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/8PG440tkycY" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </section>
 
-        <section class="section">
-            <div class="media-box">
-                <iframe src="https://app.hearthis.at/kazoth/embed/?hcolor=00f2ff&css=&skin=black" width="100%" height="350" frameborder="0" scrolling="no"></iframe>
+        <section class="player-section">
+            <div class="iframe-container">
+                <iframe 
+                    style="border:none; border-radius: 8px;" 
+                    scrolling="no" 
+                    id="hearthis_at_user_kazoth" 
+                    width="100%" 
+                    height="350" 
+                    src="https://app.hearthis.at/kazoth/embed/?hcolor=00f2ff&css=&skin=black" 
+                    frameborder="0" 
+                    allowtransparency>
+                </iframe>
             </div>
         </section>
 
-        <nav class="grid">
-            <a href="https://kazoth.bandcamp.com" target="_blank" class="grid-item">BANDCAMP</a>
-            <a href="https://www.youtube.com/@The.kAzOth" target="_blank" class="grid-item">YOUTUBE</a>
-            <a href="https://hearthis.at/kazoth" target="_blank" class="grid-item">HEARTHIS.AT</a>
-            <a href="https://audio.com/kazoth" target="_blank" class="grid-item">AUDIO.COM</a>
-            <a href="https://www.facebook.com/kAzOth.aka.Psykomars" target="_blank" class="grid-item full-width">FACEBOOK</a>
+        <nav class="social-grid">
+            <a href="https://kazoth.bandcamp.com" target="_blank" class="card bandcamp">
+                <i class="fab fa-bandcamp"></i>
+                <span>BANDCAMP</span>
+            </a>
+            <a href="https://www.youtube.com/@The.kAzOth" target="_blank" class="card youtube">
+                <i class="fab fa-youtube"></i>
+                <span>YOUTUBE</span>
+            </a>
+            <a href="https://hearthis.at/kazoth" target="_blank" class="card hearthis">
+                <i class="fas fa-headphones"></i>
+                <span>HEARTHIS.AT</span>
+            </a>
+            <a href="https://audio.com/kazoth" target="_blank" class="card audiocom">
+                <i class="fas fa-music"></i>
+                <span>AUDIO.COM</span>
+            </a>
+            <a href="https://www.facebook.com/kAzOth.aka.Psykomars" target="_blank" class="card facebook">
+                <i class="fab fa-facebook"></i>
+                <span>FACEBOOK</span>
+            </a>
         </nav>
-
     </main>
 
     <footer>
-        <p>Contact the.kAzOth@gmail.com</p>
+        <p>Booking & Contact : <a href="mailto:the.kAzOth@gmail.com">the.kAzOth@gmail.com</a></p>
     </footer>
 
 </body>
