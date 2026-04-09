@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #020202; /* Fond encore plus noir pour faire ressortir le cyan */
+    --bg-dark: #020202;
     --bg-panel: #0c0c0c;
     --accent-cyan: #00f2ff;
     --text-main: #ffffff;
@@ -17,12 +17,13 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Header BANNIERE (Couleurs et Glow mis à jour) --- */
+/* --- Banner & Alignment --- */
 .hero {
     width: 100%;
     padding: 60px 0 80px;
-    text-align: center;
-    /* Nouveau fond : Noir profond avec un dégradé radial cyan très sombre */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Recentrage logo */
     background: radial-gradient(circle, rgba(1, 26, 30, 1) 0%, rgba(2, 2, 2, 1) 80%);
 }
 
@@ -30,33 +31,38 @@ body {
     max-width: 850px;
     width: 95%;
     height: auto;
-    /* PUISSANT GLOW CYAN : Le logo brille comme un néon */
-    filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 242, 255, 0.25));
+    filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.4));
+}
+
+.subtitle-container {
+    width: 100%;
+    text-align: center;
+    margin-top: -20px;
 }
 
 .subtitle {
     color: var(--accent-cyan);
-    letter-spacing: 5px; /* Légèrement réduit pour la lisibilité */
-    font-size: 0.8rem;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
     font-weight: 900;
-    margin-top: -30px; /* Aligné sous les dents du logo */
     text-transform: uppercase;
-    /* Effet néon sur le texte */
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.6), 0 0 20px rgba(0, 242, 255, 0.4);
-    background-color: #011417; /* Un fond très sombre sous le texte pour le décoller de la bannière */
-    padding: 8px 15px;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.6);
+    background-color: rgba(1, 20, 23, 0.8);
+    padding: 10px 20px;
     display: inline-block;
     border-radius: 4px;
+    border: 1px solid rgba(0, 242, 255, 0.1);
 }
 
-/* --- Layout Grid --- */
+/* --- Layout Centralisé --- */
 .ui-grid {
-    width: 92%;
+    width: 95%;
     max-width: 1200px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 30px;
+    gap: 40px;
+    margin: 40px auto;
+    justify-content: center; /* Recentrage des colonnes */
 }
 
 .ui-tab {
@@ -72,23 +78,21 @@ body {
     border-radius: 4px 4px 0 0;
 }
 
-/* --- Lecteur --- */
 .iframe-container {
     border: 1px solid var(--border-tech);
     background: #000;
     line-height: 0;
-    overflow: hidden;
 }
 
 .neon-glow:hover {
     border-color: var(--accent-cyan);
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
 }
 
-/* --- Social Cards --- */
+/* --- Social Grid --- */
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
 }
 
@@ -99,17 +103,16 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.85rem;
     display: flex;
     align-items: center;
     gap: 15px;
     border-radius: 4px;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-.social-card i { font-size: 1.4rem; transition: 0.3s; }
+.social-card i { font-size: 1.4rem; }
 
-/* Couleurs icônes d'origine */
+/* Couleurs icônes */
 .bandcamp i { color: #629aa9; }
 .youtube i { color: #ff0000; }
 .hearthis i { color: #ff5500; }
@@ -123,11 +126,6 @@ body {
     transform: translateY(-3px);
 }
 
-.social-card:hover i {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 8px currentColor);
-}
-
 /* --- Footer --- */
 .contact-footer {
     padding: 80px 0;
@@ -137,9 +135,12 @@ body {
     letter-spacing: 2px;
 }
 
-.contact-footer a { color: var(--accent-cyan); text-decoration: none; font-weight: bold; }
+.contact-footer a { color: var(--accent-cyan); text-decoration: none; }
 
-/* Desktop View */
-@media (min-width: 900px) {
-    .ui-grid { grid-template-columns: 1.6fr 1fr; }
+/* Desktop View : On force l'équilibre des deux colonnes */
+@media (min-width: 1000px) {
+    .ui-grid { 
+        grid-template-columns: 1.5fr 1fr; 
+        align-items: start;
+    }
 }
