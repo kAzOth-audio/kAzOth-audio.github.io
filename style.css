@@ -1,13 +1,13 @@
 :root {
     --bg: #030303;
-    --accent: #00f2ff;
-    --card-bg: #080808;
-    --border: #151515;
+    --card-bg: #111;
+    --text: #ffffff;
+    --accent: #00f2ff; /* Cyan kAzOth [cite: 10, 11] */
 }
 
 body {
     background-color: var(--bg);
-    color: white;
+    color: var(--text);
     font-family: 'Inter', sans-serif;
     margin: 0;
     display: flex;
@@ -15,10 +15,10 @@ body {
     align-items: center;
 }
 
-#google_translate_element { position: absolute; top: 15px; right: 15px; }
+#google_translate_element { position: absolute; top: 10px; right: 10px; z-index: 10; }
 
 .hero {
-    padding: 80px 0;
+    padding: 60px 0;
     text-align: center;
 }
 
@@ -26,65 +26,81 @@ body {
     font-size: 5rem;
     font-weight: 900;
     margin: 0;
-    letter-spacing: -2px;
-    text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); /* Original glow [cite: 15] */
 }
 
 .subtitle {
     color: var(--accent);
-    letter-spacing: 10px;
-    font-size: 0.7rem;
+    letter-spacing: 7px;
+    font-size: 0.9rem;
     font-weight: bold;
-    opacity: 0.8;
 }
 
-main { width: 90%; max-width: 850px; }
-
-/* Style des titres de sections */
-.label {
-    font-size: 0.65rem;
-    font-weight: 900;
-    letter-spacing: 4px;
-    color: #444;
-    margin: 40px 0 15px;
+main {
+    width: 90%;
+    max-width: 800px;
+    padding-bottom: 60px;
 }
+
+/* Category styling: Less "simplistic", more pro */
+.section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #555;
+    margin: 40px 0 15px 0;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 8px;
+}
+
+.player-section { width: 100%; margin-bottom: 30px; }
 
 .iframe-container {
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
+    border: 1px solid #222; /* Original border [cite: 18] */
     background: #000;
 }
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 15px;
 }
 
 .card {
     background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 15px;
+    border: 1px solid #222;
+    padding: 20px;
     text-decoration: none;
-    color: #888;
-    font-size: 0.7rem;
+    color: var(--text);
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: 0.2s;
+    gap: 15px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
-.card:hover { border-color: var(--accent); color: white; transform: translateY(-2px); }
+/* Back to original brand colors on hover  */
+.card:hover { transform: translateX(5px); }
+.card.bandcamp:hover { border-color: #629aa9; }
+.card.youtube:hover { border-color: #ff0000; }
+.card.facebook:hover { border-color: #1877f2; }
+.card.tiktok:hover { border-color: #ff0050; }
+.card.hearthis:hover, .card.audiocom:hover { border-color: var(--accent); }
 
-.contact-box {
-    padding: 40px 0 100px;
-    font-size: 0.7rem;
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.8rem;
+    color: #444;
 }
 
-.contact-box a { color: var(--accent); text-decoration: none; font-weight: 900; }
+footer a { color: var(--accent); text-decoration: none; }
 
-@media (max-width: 600px) {
-    .hero h1 { font-size: 3.5rem; }
+@media (min-width: 600px) {
+    .social-grid { grid-template-columns: 1fr 1fr; }
 }
