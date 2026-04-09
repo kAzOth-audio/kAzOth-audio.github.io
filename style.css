@@ -1,8 +1,8 @@
 :root {
-    --bg: #030303;
+    --bg: #050505;
     --card-bg: #111;
     --text: #ffffff;
-    --accent: #00f2ff;
+    --accent: #00f2ff; /* Cyan électrique */
 }
 
 body {
@@ -13,114 +13,96 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 40px 20px;
 }
 
-/* LE STYLE QUI TE PLAISAIT : TITRE MASSIF ET ÉPURÉ */
-.hero {
-    width: 100%;
-    height: 50vh; /* Plus haut pour donner de l'importance */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at center, #111 0%, #030303 100%);
-    margin-bottom: 40px;
-}
-
-.hero h1 {
-    font-size: 5rem; /* Taille augmentée */
+header h1 {
+    font-size: 3rem;
     font-weight: 900;
-    letter-spacing: -4px; /* Resserre les lettres pour l'impact */
-    margin: 0;
+    letter-spacing: -2px;
+    margin-bottom: 0;
     text-transform: uppercase;
-    color: var(--text);
-    /* Effet néon renforcé */
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.7), 0 0 30px rgba(0, 242, 255, 0.3);
+    text-align: center;
 }
 
 .subtitle {
     color: var(--accent);
-    letter-spacing: 10px; /* Plus d'espace sous le gros titre */
+    letter-spacing: 5px;
     font-size: 0.8rem;
-    margin-top: 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-/* LE RESTE RESTE SIMPLE ET PROPRE */
-main {
-    width: 90%;
-    max-width: 800px;
-}
-
-.content-section {
+    margin-top: 5px;
     margin-bottom: 50px;
+    text-align: center;
 }
 
-.section-title {
+.player-section {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+h2 {
     font-size: 0.9rem;
-    color: #444;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
     text-transform: uppercase;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-.iframe-container, .video-container {
+.iframe-container {
     border-radius: 8px;
     overflow: hidden;
     background: var(--card-bg);
-    border: 1px solid #222;
 }
 
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+/* Fix pour la vidéo YouTube pour garder le bon format */
+.iframe-container iframe[src*="youtube"] {
+    display: block;
+    aspect-ratio: 16 / 9;
 }
 
 .social-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .card {
     background: var(--card-bg);
     border: 1px solid #222;
-    padding: 22px;
+    padding: 20px;
     text-decoration: none;
     color: var(--text);
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
     border-radius: 4px;
-    transition: 0.2s ease;
 }
 
 .card:hover {
-    transform: translateX(5px);
-    background: #1a1a1a;
     border-color: var(--accent);
+    background: #1a1a1a;
+    transform: translateY(-2px);
 }
-
-.card i { font-size: 1.5rem; color: var(--accent); width: 35px; text-align: center; }
 
 footer {
-    padding: 60px 0;
+    margin-top: 60px;
     font-size: 0.8rem;
     color: #444;
+    text-align: center;
 }
 
-footer a { color: var(--accent); text-decoration: none; }
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
 
-/* VERSION ORDINATEUR : ENCORE PLUS GRAND */
+/* Version Desktop */
 @media (min-width: 600px) {
-    .social-grid { grid-template-columns: 1fr 1fr; }
-    .hero h1 { font-size: 8rem; }
+    .social-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    header h1 {
+        font-size: 4rem;
+    }
 }
