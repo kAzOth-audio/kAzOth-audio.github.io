@@ -1,6 +1,6 @@
 :root {
-    --bg: #050505;
-    --card-bg: #0f0f0f;
+    --bg: #030303;
+    --card-bg: #111;
     --text: #ffffff;
     --accent: #00f2ff;
 }
@@ -15,81 +15,76 @@ body {
     align-items: center;
 }
 
-/* HAUT DE PAGE SANS IMAGE */
-.header-minimal {
+/* LE HAUT DE PAGE D'ORIGINE (SANS IMAGE) */
+.hero-no-image {
     width: 100%;
-    padding: 80px 0;
-    background: radial-gradient(circle at center, #111 0%, #050505 100%);
-    text-align: center;
-    border-bottom: 1px solid #1a1a1a;
+    min-height: 40vh; /* Garde une belle hauteur sans prendre tout l'écran */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #151515 0%, var(--bg) 80%); /* Dégradé subtil */
+    border-bottom: 1px solid #111;
+    margin-bottom: 50px;
 }
 
-.glitch-text {
-    font-family: 'Syncopate', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 700;
+.hero-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.hero-no-image h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: -3px;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: -2px;
     color: var(--text);
-    text-shadow: 2px 2px var(--accent);
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.5); /* Le halo cyan d'origine */
 }
 
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(0, 242, 255, 0.1);
+.subtitle {
     color: var(--accent);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.7rem;
+    letter-spacing: 7px;
+    font-size: 0.9rem;
+    margin-top: 5px;
     font-weight: bold;
-    letter-spacing: 3px;
-    margin-top: 15px;
-    border: 1px solid rgba(0, 242, 255, 0.2);
+    text-transform: uppercase;
 }
 
-.dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent);
-}
-
-/* SECTIONS */
+/* SECTIONS PRINCIPALES */
 main {
     width: 90%;
     max-width: 800px;
-    padding: 40px 0;
+    padding-bottom: 60px;
 }
 
 .content-section {
-    margin-bottom: 40px;
+    width: 100%;
+    margin-bottom: 45px;
 }
 
 .section-title {
-    font-size: 0.8rem;
-    color: #444;
+    font-size: 0.9rem;
+    color: var(--text);
     letter-spacing: 2px;
     margin-bottom: 15px;
     text-transform: uppercase;
-    border-left: 2px solid var(--accent);
+    border-left: 3px solid var(--accent);
     padding-left: 10px;
 }
 
-/* MÉDIAS */
+/* CONTENEURS MÉDIAS */
 .iframe-container, .video-container {
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     background: var(--card-bg);
-    border: 1px solid #1a1a1a;
+    border: 1px solid #222;
 }
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* Ratio 16:9 de YouTube */
     height: 0;
 }
 
@@ -102,41 +97,44 @@ main {
 .social-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 15px;
 }
 
 .card {
     background: var(--card-bg);
-    border: 1px solid #1a1a1a;
-    padding: 18px;
+    border: 1px solid #222;
+    padding: 20px;
     text-decoration: none;
     color: var(--text);
     font-weight: bold;
     display: flex;
     align-items: center;
     gap: 15px;
-    border-radius: 8px;
-    transition: 0.3s ease;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
-.card:hover {
-    background: #151515;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
+.card i { font-size: 1.5rem; width: 30px; text-align: center; }
 
-.card i { font-size: 1.2rem; width: 25px; text-align: center; color: var(--accent); }
+.card:hover { transform: translateX(5px); background: #1a1a1a; }
+.card.bandcamp:hover { border-color: #629aa9; color: #629aa9;}
+.card.youtube:hover { border-color: #ff0000; color: #ff0000;}
+.card.facebook:hover { border-color: #1877f2; color: #1877f2;}
+.card.hearthis:hover, .card.audiocom:hover { border-color: var(--accent); color: var(--accent); }
 
-/* FOOTER */
 footer {
-    padding: 60px 0;
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
     font-size: 0.8rem;
-    color: #333;
+    color: #555;
+    border-top: 1px solid #111;
 }
 
 footer a { color: var(--accent); text-decoration: none; }
 
+/* ADAPTATION ORDINATEUR */
 @media (min-width: 600px) {
     .social-grid { grid-template-columns: 1fr 1fr; }
-    .glitch-text { font-size: 5rem; }
+    .hero-no-image h1 { font-size: 6rem; }
 }
