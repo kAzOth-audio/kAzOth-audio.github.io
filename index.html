@@ -1,118 +1,48 @@
-:root {
-    --bg: #000000;
-    --text: #ffffff;
-    --border: #1a1a1a;
-    --hover: #222222;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAZOTH | OFFICIAL</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-* { box-sizing: border-box; }
+    <header>
+        <h1>KAZOTH</h1>
+        <div class="line"></div>
+    </header>
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px;
-}
+    <main>
+        <div class="media-block">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/8PG440tkycY" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
 
-header {
-    margin-top: 80px;
-    margin-bottom: 60px;
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-}
+        <div class="media-block">
+            <iframe src="https://app.hearthis.at/kazoth/embed/?hcolor=ffffff&css=&skin=black" width="100%" height="350" frameborder="0" scrolling="no"></iframe>
+        </div>
 
-h1 {
-    font-size: 5rem;
-    font-weight: 900;
-    letter-spacing: -4px;
-    margin: 0;
-    text-transform: uppercase;
-}
+        <nav class="links-grid">
+            <a href="https://kazoth.bandcamp.com" target="_blank">BANDCAMP</a>
+            <a href="https://www.youtube.com/@The.kAzOth" target="_blank">YOUTUBE</a>
+            <a href="https://hearthis.at/kazoth" target="_blank">HEARTHIS.AT</a>
+            <a href="https://audio.com/kazoth" target="_blank">AUDIO.COM</a>
+            <a href="https://www.facebook.com/kAzOth.aka.Psykomars" target="_blank">FACEBOOK</a>
+            <a href="https://www.tiktok.com/@the.kazoth" target="_blank">TIKTOK</a>
+        </nav>
 
-.line {
-    height: 1px;
-    background: var(--text);
-    width: 40px;
-    margin: 20px auto;
-}
+        <div class="contact-area">
+            <a href="mailto:the.kAzOth@gmail.com">CONTACT@KAZOTH</a>
+        </div>
+    </main>
 
-main {
-    width: 100%;
-    max-width: 800px;
-}
+    <footer>
+        <p>© KAZOTH 2026</p>
+    </footer>
 
-.media-block {
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-    background: #050505;
-}
-
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-
-/* LINKS GRID : Propre et ordonné */
-.links-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.links-grid a {
-    border: 1px solid var(--border);
-    padding: 25px;
-    text-align: center;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    transition: 0.2s ease;
-}
-
-.links-grid a:hover {
-    background: var(--text);
-    color: var(--bg);
-}
-
-/* CONTACT */
-.contact-area {
-    margin-top: 60px;
-    text-align: center;
-}
-
-.contact-area a {
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 0.8rem;
-    letter-spacing: 4px;
-    border-bottom: 1px solid var(--text);
-    padding-bottom: 5px;
-}
-
-footer {
-    padding: 100px 0 40px;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    opacity: 0.3;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .links-grid { grid-template-columns: 1fr; }
-    h1 { font-size: 3rem; }
-}
+</body>
+</html>
