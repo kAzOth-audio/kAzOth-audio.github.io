@@ -1,218 +1,265 @@
 :root {
-    --cyan: #00f2ff;
-    --magenta: #ff00ff;
-    --bg: #010101;
-    --card: rgba(15, 15, 15, 0.95);
-    --border: #222;
-    --font-mono: 'JetBrains Mono', monospace;
+    --core-cyan: #00f2ff;
+    --dark-cyan: rgba(0, 242, 255, 0.15);
+    --void: #030303;
+    --surface: rgba(12, 12, 12, 0.65); /* Transparence pour effet verre fumé */
+    --steel: #1e1e1e;
+    --text-high: #ffffff;
+    --text-low: #666666;
+    
     --font-ui: 'Rajdhani', sans-serif;
-    --font-heading: 'Orbitron', sans-serif;
+    --font-data: 'JetBrains Mono', monospace;
+    --font-display: 'Orbitron', sans-serif;
+    
+    /* La courbe mathématique d'animation "Haut de gamme" (Expo Out) */
+    --ease-elite: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Setup */
+/* Scrollbar Custom Industrielle */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--steel); }
+::-webkit-scrollbar-thumb:hover { background: var(--core-cyan); }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: var(--bg);
-    color: #fff;
+    background-color: var(--void);
+    color: var(--text-high);
     font-family: var(--font-ui);
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-/* BACKGROUNDS ANIMÉS (Optimisés pour performance) */
-.grid-background {
-    position: fixed;
-    top: 0; left: 0; width: 200%; height: 200%;
+/* =========================================
+   MOTEUR DE RENDU D'ARRIÈRE-PLAN
+========================================= */
+.void-engine {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1; pointer-events: none;
+}
+
+.kinetic-grid {
+    position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
     background-image: 
-        linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg) translateY(-20%);
-    animation: gridMove 20s linear infinite;
-    z-index: -1;
-    pointer-events: none;
+        linear-gradient(var(--dark-cyan) 1px, transparent 1px),
+        linear-gradient(90deg, var(--dark-cyan) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(600px) rotateX(70deg);
+    animation: panGrid 30s linear infinite;
+    /* Force GPU Acceleration */
+    will-change: transform;
 }
 
-@keyframes gridMove { 100% { transform: perspective(500px) rotateX(60deg) translateY(50px); } }
-
-.laser-scanner {
-    position: fixed;
-    top: -100px; left: 0; width: 100%; height: 2px;
-    background: var(--cyan);
-    box-shadow: 0 0 15px var(--cyan);
-    z-index: 100;
-    opacity: 0.15;
-    animation: scan 8s linear infinite;
-    pointer-events: none;
+@keyframes panGrid { 
+    0% { transform: perspective(600px) rotateX(70deg) translateY(0); } 
+    100% { transform: perspective(600px) rotateX(70deg) translateY(60px); } 
 }
 
-@keyframes scan { 0% { top: -5%; } 100% { top: 105%; } }
+/* Bruit analogique généré en CSS (0 kb d'image) */
+.analog-noise {
+    position: absolute; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+}
 
-/* HUD DECORATIONS - Invisibles sur très petits écrans */
-.hud-frame .corner {
-    position: fixed;
+.vignette-mask {
+    position: absolute; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, var(--void) 90%);
+}
+
+/* =========================================
+   STRUCTURE PRINCIPALE
+========================================= */
+.core-mainframe {
+    width: 100%; max-width: 1300px; margin: 0 auto;
+    padding: clamp(3rem, 8vw, 8rem) 1.5rem;
+}
+
+/* --- LE MONOLITHE (LOGO) --- */
+.hero-monolith { text-align: center; margin-bottom: clamp(5rem, 12vw, 10rem); }
+
+.logo-containment {
+    position: relative; width: 100%; max-width: 1100px; margin: 0 auto 3rem;
+}
+
+.apex-logo {
+    width: 100%; height: auto;
+    position: relative; z-index: 2;
+    /* Ombre portée calculée au pixel près pour la netteté */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(0, 242, 255, 0.2));
+    animation: floatLogo 6s ease-in-out infinite;
+    will-change: transform, filter;
+}
+
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8)) drop-shadow(0 0 10px rgba(0, 242, 255, 0.1)); }
+    50% { transform: translateY(-10px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.9)) drop-shadow(0 0 25px rgba(0, 242, 255, 0.3)); }
+}
+
+/* Le Halo cyan en arrière plan du logo */
+.logo-backlight {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 60%; height: 40%;
+    background: var(--core-cyan);
+    filter: blur(100px); opacity: 0.1; z-index: 1;
+}
+
+/* --- CLASSIFICATION (GENRES) --- */
+.classification-bar {
+    display: flex; align-items: center; justify-content: center; gap: clamp(10px, 3vw, 40px);
+}
+
+.blade-line {
+    height: 1px; flex-grow: 1; max-width: 200px;
+    background: linear-gradient(90deg, transparent, var(--steel) 50%, transparent);
+}
+
+.genre-matrix {
+    font-family: var(--font-display);
+    font-size: clamp(0.7rem, 1.8vw, 1.1rem);
+    letter-spacing: clamp(3px, 1vw, 8px);
+    color: var(--text-low);
+    font-weight: 700;
+}
+
+.genre-matrix .sep { color: var(--core-cyan); margin: 0 10px; opacity: 0.5; }
+
+/* =========================================
+   MODULES (AUDIO & RESEAUX)
+========================================= */
+.hardware-module { margin-bottom: clamp(5rem, 10vw, 8rem); }
+
+.module-header {
+    display: flex; align-items: baseline; gap: 15px; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--steel); padding-bottom: 10px;
+}
+
+.cyber-tag {
+    font-family: var(--font-data); font-size: 0.7rem; color: var(--void);
+    background: var(--core-cyan); padding: 2px 8px; font-weight: 700;
+}
+
+.module-title {
+    font-family: var(--font-display); font-size: 1.2rem;
+    letter-spacing: 4px; color: var(--text-high);
+}
+
+/* CHASSIS AUDIO AVEC EFFET VERRE FUMÉ (SMOKED GLASS) */
+.deck-chassis {
+    position: relative;
+    background: var(--surface);
+    backdrop-filter: blur(15px); /* L'effet Haut de Gamme */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 242, 255, 0.3);
     padding: 10px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--cyan);
-    letter-spacing: 2px;
-    opacity: 0.4;
-    z-index: 200;
-    pointer-events: none;
-}
-.top-left { top: 20px; left: 20px; border-left: 2px solid var(--cyan); border-top: 2px solid var(--cyan); }
-.top-right { top: 20px; right: 20px; border-right: 2px solid var(--cyan); border-top: 2px solid var(--cyan); }
-.bottom-left { bottom: 20px; left: 20px; border-left: 2px solid var(--cyan); border-bottom: 2px solid var(--cyan); }
-.bottom-right { bottom: 20px; right: 20px; border-right: 2px solid var(--cyan); border-bottom: 2px solid var(--cyan); }
-
-/* MAIN CONTAINER RESPONSIVE */
-.main-interface {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: clamp(2rem, 8vw, 6rem) 1.5rem;
+    /* La découpe sci-fi des coins */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 
-/* HEADER : LOGO & GENRES */
-.hero { text-align: center; margin-bottom: clamp(4rem, 10vw, 8rem); }
-
-.logo-area { position: relative; display: inline-block; width: 100%; margin-bottom: 3rem; }
-
-.mega-logo {
-    width: 100%;
-    max-width: 1000px; /* Bridge pour les consoles et PC */
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(0,242,255,0.1));
-    animation: breathe 4s ease-in-out infinite;
-}
-
-@keyframes breathe { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--cyan)); } 50% { transform: scale(1.02); filter: drop-shadow(0 0 30px var(--cyan)); } }
-
-.genre-container { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: clamp(10px, 3vw, 30px); 
-}
-.line-decor { height: 1px; flex-grow: 1; max-width: 150px; background: linear-gradient(90deg, transparent, var(--cyan)); }
-.line-decor:last-child { background: linear-gradient(90deg, var(--cyan), transparent); }
-
-.genre-list {
-    font-family: var(--font-heading);
-    font-size: clamp(0.6rem, 1.5vw, 1rem); /* Fluide selon l'écran */
-    letter-spacing: clamp(2px, 1vw, 5px);
-    color: #888;
-    white-space: nowrap;
-}
-
-/* MODULES UI */
-.module { margin-bottom: clamp(4rem, 10vw, 8rem); }
-
-.module-info {
-    font-family: var(--font-mono);
-    margin-bottom: 1.5rem;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-.module-num { color: #333; font-size: clamp(1rem, 3vw, 1.5rem); font-weight: 900; }
-.module-name { color: var(--cyan); letter-spacing: 2px; font-size: 0.7rem; }
-
-/* DECK AUDIO */
-.deck-frame {
-    background: #000;
-    border: 1px solid var(--border);
-    padding: clamp(5px, 1vw, 15px);
-    box-shadow: 0 0 50px rgba(0,0,0,1);
-}
-
-/* RACK GRID UNIVERSELLE */
-.rack-grid {
+/* =========================================
+   GRILLE NEURALE (RÉSEAUX SOCIAUX)
+========================================= */
+.matrix-grid {
     display: grid;
-    /* Grid intelligente : auto-fit remplit selon la largeur */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-.rack-slot {
-    min-height: 120px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #555;
-    padding: 20px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.cyber-node {
+    position: relative; height: 110px;
+    background: var(--surface);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--steel);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--text-low);
+    /* Découpe de précision */
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.5s var(--ease-elite);
+    overflow: hidden;
 }
 
-.rack-slot i { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 10px; }
-.rack-slot span { font-family: var(--font-heading); font-size: clamp(0.55rem, 1.2vw, 0.7rem); letter-spacing: 2px; }
-
-.rack-slot:hover {
-    border-color: var(--cyan);
-    color: #fff;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+.node-content {
+    display: flex; align-items: center; gap: 20px; z-index: 2;
+    transition: transform 0.5s var(--ease-elite);
 }
 
-/* CONTACT TERMINAL */
-.contact-terminal {
-    display: block;
-    background: #050505;
-    border: 1px solid var(--border);
-    padding: clamp(3rem, 10vw, 6rem) 1rem;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s;
+.cyber-node i { font-size: 2rem; transition: color 0.3s ease; }
+.node-label { font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 3px; }
+
+/* Micro-interaction "HUD Brackets" au survol */
+.target-bracket {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 40px; border: 2px solid var(--core-cyan);
+    opacity: 0; transition: all 0.5s var(--ease-elite);
+}
+.target-bracket.left { left: -30px; border-right: none; }
+.target-bracket.right { right: -30px; border-left: none; }
+
+.cyber-node:hover {
+    background: rgba(0, 242, 255, 0.05);
+    border-color: var(--core-cyan);
+    color: var(--text-high);
 }
 
-.main-mail {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: clamp(1rem, 5vw, 2.5rem);
-    color: var(--cyan);
-    letter-spacing: clamp(2px, 1vw, 5px);
-    margin-bottom: 1rem;
+.cyber-node:hover i { color: var(--core-cyan); filter: drop-shadow(0 0 8px var(--core-cyan)); }
+.cyber-node:hover .node-content { transform: scale(1.05); }
+
+/* Animation des crochets cibles */
+.cyber-node:hover .target-bracket { opacity: 1; }
+.cyber-node:hover .target-bracket.left { left: 15px; }
+.cyber-node:hover .target-bracket.right { right: 15px; }
+
+/* =========================================
+   BOUTON DE COMMANDE (BOOKING)
+========================================= */
+.override-button {
+    display: block; position: relative;
+    background: #050505; border: 1px solid var(--steel);
+    padding: clamp(3rem, 8vw, 5rem) 1rem;
+    text-align: center; text-decoration: none;
+    overflow: hidden;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    transition: all 0.5s var(--ease-elite);
 }
 
-.sub-mail { font-family: var(--font-mono); color: #333; font-size: 0.7rem; }
+.btn-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
 
-/* -----------------------------------------------------------
-   MEDIA QUERIES : ADAPTATION SPECIFIQUE
-   ----------------------------------------------------------- */
-
-/* TABLETTES & PETITS LAPTOPS */
-@media (max-width: 1024px) {
-    .rack-grid { grid-template-columns: repeat(2, 1fr); }
-    .hud-frame .corner { opacity: 0.2; } /* On estompe le décor */
+.prime-data {
+    font-family: var(--font-display); font-size: clamp(1.2rem, 4vw, 2.5rem);
+    color: var(--core-cyan); letter-spacing: 5px; font-weight: 700;
 }
 
-/* SMARTPHONES & CONSOLES (MODE PORTRAIT) */
-@media (max-width: 600px) {
-    .rack-grid { grid-template-columns: 1fr; } /* Une seule colonne pour cliquer facilement */
+.sub-data { font-family: var(--font-data); color: #555; font-size: 0.8rem; }
+
+/* Ligne de scan au survol */
+.btn-scanline {
+    position: absolute; top: -50px; left: -50%; width: 200%; height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.2), transparent);
+    transform: rotate(15deg); transition: top 0.6s ease; z-index: 1;
+}
+
+.override-button:hover { background: #0a0a0a; border-color: var(--core-cyan); box-shadow: 0 0 40px rgba(0,242,255,0.1); }
+.override-button:hover .prime-data { text-shadow: 0 0 15px var(--core-cyan); }
+.override-button:hover .sub-data { color: var(--text-high); }
+.override-button:hover .btn-scanline { top: 150%; }
+
+.system-footprint { text-align: center; margin-top: 4rem; }
+.footprint-data { font-family: var(--font-data); font-size: 0.65rem; color: #333; letter-spacing: 3px; }
+
+/* =========================================
+   RESPONSIVE ULTIME (MOBILE & CONSOLE)
+========================================= */
+@media (max-width: 768px) {
+    /* Sur mobile, on enlève les animations lourdes sur le logo pour la batterie */
+    .apex-logo { animation: none; }
     
-    .hud-frame { display: none; } /* On retire le HUD pour gagner de la place */
+    /* Réduction drastique des angles coupés pour garder de l'espace */
+    .cyber-node { clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px); }
     
-    .line-decor { display: none; } /* On simplifie le header */
-    
-    .rack-slot { min-height: 100px; flex-direction: row; justify-content: flex-start; gap: 25px; padding-left: 30px; }
-    .rack-slot i { margin-bottom: 0; }
-    
-    .mega-logo { width: 95%; }
-}
-
-/* OPTIMISATION CONSOLE (GRANDS ÉCRANS / NAVIGATION MANETTE) */
-@media (min-width: 2000px) {
-    .main-interface { max-width: 1600px; }
-    .mega-logo { max-width: 1400px; }
-}
-
-/* GESTION DU HOVER (Pour éviter les bugs sur tactile) */
-@media (hover: hover) {
-    .contact-terminal:hover { background: var(--cyan); }
-    .contact-terminal:hover .main-mail, .contact-terminal:hover .sub-mail { color: #000; }
+    .genre-matrix { display: flex; flex-direction: column; gap: 5px; }
+    .genre-matrix .sep { display: none; } /* Enlève les slashs si on empile les mots */
 }
