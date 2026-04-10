@@ -1,236 +1,215 @@
 :root {
-    --bg-void: #030303;
-    --text-core: #f4f4f4;
-    --text-muted: #555555;
-    --accent-cyan: #00f2ff;
+    --bg-deep: #050505;
+    --bg-panel: #0a0a0a;
+    --cyan-core: #00f2ff;
+    --cyan-dim: rgba(0, 242, 255, 0.15);
+    --text-bright: #ffffff;
+    --text-dim: #666666;
+    --border-dim: #222222;
     
+    --font-sys: 'JetBrains Mono', monospace;
     --font-head: 'Oswald', sans-serif;
     --font-body: 'Inter', sans-serif;
-    --font-tech: 'JetBrains Mono', monospace; /* Meilleure que Roboto Mono pour l'aspect code */
-    
-    --space-sm: 1rem;
-    --space-md: 2.5rem;
-    --space-lg: 5rem;
 }
 
-/* Reset purifié */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: var(--bg-void);
-    color: var(--text-core);
+    background-color: var(--bg-deep);
+    color: var(--text-bright);
     font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
+    justify-content: center;
+    padding: 2rem 1rem;
 }
 
-/* Texture analogique crasseuse (remplace les bordures techno) */
-.noise-overlay {
+/* Effet CRT très léger pour l'immersion sans casser la lisibilité */
+.scanline-effect {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
     pointer-events: none;
-    z-index: 50;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 100;
 }
 
-/* Grille structurelle globale */
-.layout-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-    padding: var(--space-md) var(--space-lg);
-    gap: var(--space-lg);
-    position: relative;
-    z-index: 1;
-    max-width: 1600px;
-    margin: 0 auto;
+.terminal-container {
     width: 100%;
-}
-
-/* --- HEADER --- */
-.masthead {
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
+    z-index: 10;
+}
+
+/* --- HEADER & LOGO --- */
+.sys-header {
+    text-align: center;
+    border-bottom: 1px solid var(--cyan-dim);
+    padding-bottom: 2rem;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-sys);
+    font-size: 0.75rem;
+    color: var(--cyan-core);
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
 }
 
 .status-indicator {
-    font-family: var(--font-tech);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    animation: pulse 2s infinite;
 }
 
-.pulse {
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent-cyan);
-    border-radius: 50%;
-    animation: blink 2s infinite;
+@keyframes pulse {
+    0%, 100% { opacity: 1; text-shadow: 0 0 8px var(--cyan-core); }
+    50% { opacity: 0.4; text-shadow: none; }
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent-cyan); }
-    50% { opacity: 0.2; box-shadow: none; }
+.logo-container {
+    margin: 2rem auto;
+    max-width: 500px;
 }
 
-.brand-title {
-    font-family: var(--font-head);
-    font-size: clamp(4rem, 12vw, 10rem);
-    font-weight: 700;
-    line-height: 0.8;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    color: var(--text-core);
-}
-
-.brand-subtitle {
-    font-family: var(--font-tech);
-    font-size: clamp(0.8rem, 1.5vw, 1rem);
-    color: var(--text-muted);
-    letter-spacing: 0.2em;
-}
-
-/* --- MAIN CONTENT --- */
-.core-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    align-content: center;
-}
-
-/* Labels techniques minimalistes */
-.section-label {
-    font-family: var(--font-tech);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 0.15em;
-    margin-bottom: 1.5rem;
-}
-
-/* Manifesto Brutaliste */
-.manifesto {
-    max-width: 800px;
-}
-
-.manifesto-lead {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 5vw, 4rem);
-    text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 1rem;
-}
-
-.manifesto-body {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    color: #999;
-    max-width: 60ch;
-    line-height: 1.5;
-}
-
-/* Player Audio */
-.player-container {
+.brand-image {
     width: 100%;
-    max-width: 800px;
-    filter: grayscale(100%) contrast(1.2); /* Rendu plus sombre du player */
-    transition: filter 0.4s ease;
+    height: auto;
+    filter: drop-shadow(0 0 10px var(--cyan-dim));
+    transition: filter 0.3s ease;
 }
 
-.player-container:hover {
-    filter: grayscale(0%) contrast(1);
+.brand-image:hover {
+    filter: drop-shadow(0 0 20px var(--cyan-core));
 }
 
-/* --- FOOTER --- */
-.terminal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 1px solid #1a1a1a;
-    padding-top: var(--space-md);
-    flex-wrap: wrap;
-    gap: var(--space-md);
-}
-
-.booking-link {
-    font-family: var(--font-head);
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    color: var(--text-core);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.booking-link:hover {
-    color: var(--accent-cyan);
-}
-
-/* Réduction de la grille sociale vers une liste élégante */
-.social-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.social-list a {
-    font-family: var(--font-tech);
+.sub-classification {
+    font-family: var(--font-sys);
     font-size: 0.85rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    transition: all 0.3s ease;
-    display: inline-block;
-    position: relative;
-    width: fit-content;
+    color: var(--text-dim);
+    letter-spacing: 4px;
 }
 
-.social-list a::after {
+/* --- MODULES (Architecture Commune) --- */
+.sys-module {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.sys-module::before {
     content: '';
     position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: var(--accent-cyan);
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    top: -1px; left: -1px;
+    width: 20px; height: 20px;
+    border-top: 2px solid var(--cyan-core);
+    border-left: 2px solid var(--cyan-core);
 }
 
-.social-list a:hover {
-    color: var(--text-core);
+.module-title {
+    font-family: var(--font-sys);
+    font-size: 0.9rem;
+    color: var(--cyan-core);
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
 }
 
-.social-list a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+/* --- NETWORKS GRID --- */
+.network-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.net-node {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-dim);
+    padding: 1rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--font-sys);
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+/* Distinction visuelle entre majeurs et mineurs */
+.net-node.primary {
+    grid-column: span 1;
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--text-bright);
+}
+
+.net-node.secondary {
+    padding: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.net-node i {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+}
+
+.net-node:hover {
+    border-color: var(--cyan-core);
+    background: var(--cyan-dim);
+    color: var(--text-bright);
+    box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.1);
+}
+
+.net-node:hover i {
+    color: var(--cyan-core);
+}
+
+/* --- BOOKING MODULE --- */
+.booking-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(0, 242, 255, 0.05);
+    border: 1px solid var(--cyan-core);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-data {
+    font-family: var(--font-sys);
+    font-size: 0.8rem;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+}
+
+.btn-text {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    color: var(--cyan-core);
+    letter-spacing: 2px;
+}
+
+.booking-action:hover {
+    background: var(--cyan-core);
+}
+
+.booking-action:hover .btn-data,
+.booking-action:hover .btn-text {
+    color: var(--bg-deep);
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-    .layout-grid {
-        padding: var(--space-md) var(--space-sm);
-    }
-    
-    .terminal-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-@media (min-width: 1024px) {
-    .core-content {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-lg);
-    }
+@media (max-width: 600px) {
+    .network-grid { grid-template-columns: 1fr; }
+    .net-node.primary { grid-column: 1 / -1; }
+    .btn-text { font-size: 1.2rem; }
+    .status-bar { flex-direction: column; gap: 10px; align-items: center; }
 }
