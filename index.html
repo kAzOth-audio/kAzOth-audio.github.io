@@ -3,60 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kAzOth` // My platforms</title>
-    <meta name="description" content="KAZOTH - Hardcore, Darkcore, Doomcore, Industrial Techno. Zone-01 Transmission.">
+    <title>KAZOTH | Transmission Core</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="scanline-effect"></div>
 
-    <div class="layout-grid">
-        <header class="masthead">
-            <div class="status-indicator">
-                <span class="pulse"></span> LIVE_TRANSMISSION
+    <main class="terminal-container">
+        <header class="sys-header">
+            <div class="status-bar">
+                <span class="status-indicator">● LIVE</span>
+                <span class="sys-id">ZONE-01 // FREQ: ERROR909</span>
             </div>
-            <h1 class="brand-title">KAZOTH</h1>
-            <p class="brand-subtitle">INDUSTRIAL // DOOMCORE // TECHNO</p>
+            
+            <div class="logo-container">
+                <img src="kAzOth.vNm.png" alt="KAZOTH Logo" class="brand-image">
+            </div>
+            
+            <h2 class="sub-classification">HARDCORE / DARKCORE / DOOMCORE / INDUSTRIAL / TECHNO</h2>
         </header>
 
-        <main class="core-content">
-            <section class="manifesto">
-                <p class="manifesto-lead">CRUSHING LOOPS.</p>
-                <p class="manifesto-body">Mechanical weight. Nothing pulls you back. The architecture of pure sonic violence.</p>
-            </section>
-
-            <section class="audio-core">
-                <div class="section-label">[ LATEST_SIGNAL ]</div>
-                <div class="player-container">
-                    <iframe 
-                        width="100%" height="200" 
-                        src="https://hearthis.at/kazoth/embed/?hcolor=00f2ff&skin=black" 
-                        frameborder="0" 
-                        allowtransparency="true"
-                        title="KAZOTH Audio Player">
-                    </iframe>
-                </div>
-            </section>
-        </main>
-
-        <footer class="terminal-footer">
-            <div class="footer-block booking">
-                <div class="section-label">[ INQUIRIES ]</div>
-                <a href="mailto:the.kAzOth@gmail.com" class="booking-link">THE.KAZOTH@GMAIL.COM</a>
+        <section class="sys-module audio-module">
+            <h3 class="module-title">>> LATEST_TRANSMISSION</h3>
+            <div class="hardware-wrapper">
+                <iframe 
+                    width="100%" height="200" 
+                    src="https://hearthis.at/kazoth/embed/?hcolor=00f2ff&skin=black" 
+                    frameborder="0" 
+                    allowtransparency="true"
+                    title="KAZOTH Audio Player">
+                </iframe>
             </div>
+        </section>
 
-            <div class="footer-block network">
-                <div class="section-label">[ NETWORK ]</div>
-                <nav class="social-list">
-                    <a href="https://soundcloud.com/the_kazoth" target="_blank" rel="noopener">SOUNDCLOUD</a>
-                    <a href="https://kazoth.bandcamp.com" target="_blank" rel="noopener">BANDCAMP</a>
-                    <a href="https://www.instagram.com/the_kazoth" target="_blank" rel="noopener">INSTAGRAM</a>
-                    <a href="https://linktw.in/bQEHiM" target="_blank" rel="noopener">YOUTUBE</a>
-                </nav>
+        <section class="sys-module network-module">
+            <h3 class="module-title">>> NEURAL_NETWORK</h3>
+            
+            <div class="network-grid">
+                <a href="https://soundcloud.com/the_kazoth" target="_blank" class="net-node primary">
+                    <i class="fab fa-soundcloud"></i>
+                    <span>SOUNDCLOUD</span>
+                </a>
+                <a href="https://kazoth.bandcamp.com" target="_blank" class="net-node primary">
+                    <i class="fab fa-bandcamp"></i>
+                    <span>BANDCAMP</span>
+                </a>
+                <a href="https://www.instagram.com/the_kazoth" target="_blank" class="net-node primary">
+                    <i class="fab fa-instagram"></i>
+                    <span>INSTAGRAM</span>
+                </a>
+                <a href="https://linktw.in/bQEHiM" target="_blank" class="net-node primary">
+                    <i class="fab fa-youtube"></i>
+                    <span>YOUTUBE</span>
+                </a>
+
+                <a href="https://hearthis.at/kazoth" target="_blank" class="net-node secondary">
+                    <i class="fas fa-headphones"></i> HEARTHIS
+                </a>
+                <a href="https://audio.com/kazoth" target="_blank" class="net-node secondary">
+                    <i class="fas fa-music"></i> AUDIO.COM
+                </a>
+                <a href="https://www.mixcloud.com/Psykomars" target="_blank" class="net-node secondary">
+                    <i class="fab fa-mixcloud"></i> MIXCLOUD
+                </a>
+                <a href="https://www.tiktok.com/@the.kazoth" target="_blank" class="net-node secondary">
+                    <i class="fab fa-tiktok"></i> TIKTOK
+                </a>
+                <a href="https://www.facebook.com/kAzOth.aka.Psykomars" target="_blank" class="net-node secondary">
+                    <i class="fab fa-facebook"></i> FACEBOOK
+                </a>
             </div>
+        </section>
+
+        <footer class="sys-module booking-module">
+            <a href="mailto:the.kAzOth@gmail.com" class="booking-action">
+                <span class="btn-data">[ INITIATE CONTACT ]</span>
+                <span class="btn-text">the.kAzOth@gmail.com</span>
+            </a>
         </footer>
-    </div>
+    </main>
 </body>
 </html>
