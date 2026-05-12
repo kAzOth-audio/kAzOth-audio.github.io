@@ -8,6 +8,7 @@
     --font-display: 'Cinzel', serif;
 }
 
+/* Scrollbar minimaliste */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--void); }
 ::-webkit-scrollbar-thumb { background: var(--steel); }
