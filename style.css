@@ -1,277 +1,235 @@
-/* --- JETONS DE DESIGN STRUCTURAUX --- */
+/* --- BRUTAL INDUSTRIAL DESIGN TOKENS --- */
 :root {
-    --bg-void: #000000;
-    --bg-surface: #050505;
-    --border-dark: #121212;
-    --border-medium: #222222;
-    --border-bright: #444444;
+    --black-void: #000000;
+    --concrete-dark: #0a0a0a;
+    --concrete-border: #1a1a1a;
+    --strobe-white: #ffffff;
+    --iron-grey: #555555;
+    --raw-dim: #222222;
     
-    --text-pure: #ffffff;
-    --text-muted: #888888;
-    --text-dim: #333333;
-    
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-serif: 'Cinzel', serif;
-    --transition-clean: cubic-bezier(0.25, 1, 0.5, 1);
+    --font-industrial: 'JetBrains Mono', monospace;
+    --font-monolith: 'Cinzel', serif;
 }
 
-/* --- REINITIALISATION & STRUTURE CORE --- */
+/* --- CORE SYSTEMS --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg-void); }
-::-webkit-scrollbar-thumb { background: var(--border-bright); }
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--black-void); }
+::-webkit-scrollbar-thumb { background: var(--iron-grey); }
 
 body {
-    background-color: var(--bg-void);
-    color: var(--text-pure);
-    font-family: var(--font-mono);
+    background-color: var(--black-void);
+    color: var(--strobe-white);
+    font-family: var(--font-industrial);
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: grayscale;
 }
 
-/* Texture analogique très subtile en arrière-plan */
-.analog-noise {
+/* Texture de grain argentique lourd (effet photocopie de fanzine) */
+.warehouse-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.04; mix-blend-mode: overlay; pointer-events: none; z-index: 99;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='heavy'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23heavy)'/%3E%3C/svg%3E");
+    opacity: 0.06; mix-blend-mode: screen; pointer-events: none; z-index: 100;
 }
 
-.vignette {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 50%, #000000 150%);
-    pointer-events: none; z-index: 98;
-}
-
-/* --- LAYOUT CONFIGURATION --- */
-.core-mainframe {
+/* --- STRUCTURE FRAMEWORK --- */
+.industrial-mainframe {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 6rem 2rem;
-    position: relative;
-    z-index: 10;
+    padding: 4rem 1.5rem;
 }
 
-.layout-reveal {
-    animation: strictFadeIn 1s var(--transition-clean) forwards;
+/* --- HEADER MONOLITHE --- */
+.monolith-header {
+    margin-bottom: 6rem;
+    border: 2px solid var(--concrete-border);
+    background: var(--black-void);
 }
-@keyframes strictFadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- BANNIÈRE MINIMALISTE --- */
-.hero-monolith {
-    margin-bottom: 5rem;
-    border: 1px solid var(--border-dark);
-    background: var(--bg-void);
-}
-.banner-wrap { position: relative; width: 100%; overflow: hidden; line-height: 0; }
-.apex-banner { 
+.raw-banner-container { position: relative; width: 100%; overflow: hidden; line-height: 0; }
+.industrial-banner { 
     width: 100%; 
     height: auto; 
-    filter: grayscale(1) contrast(1.1);
-    transition: filter 0.5s var(--transition-clean);
+    filter: grayscale(1) contrast(1.3);
 }
-.hero-monolith:hover .apex-banner {
-    filter: grayscale(0.1) contrast(1.05);
-}
-.banner-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent 70%, var(--bg-void));
+.shadow-cutoff {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--black-void));
 }
 
-/* --- STRUCTURE DES MODULES (BRUTALISME STRUCTURÉ) --- */
-.hardware-module {
-    margin-bottom: 6rem;
-    position: relative;
-    padding: 3rem;
-    border: 1px solid var(--border-dark);
-    background: var(--bg-surface);
-}
-
-.corner-tag { position: absolute; width: 10px; height: 10px; border: 1px solid var(--border-bright); }
-.top-left { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.top-right { top: -1px; right: -1px; border-left: none; border-bottom: none; }
-
-.module-header {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--border-dark);
-    padding-bottom: 1rem;
-}
-.industrial-badge {
-    font-size: 0.6rem;
-    color: var(--text-dim);
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-.module-title {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    letter-spacing: 6px;
-    color: var(--text-pure);
-    text-transform: uppercase;
-    font-weight: 900;
-}
-
-.deck-chassis {
-    background: var(--bg-void);
-    border: 1px solid var(--border-dark);
-    padding: 1px;
-}
-
-/* --- HUB DE STREAMING (CONTRÔLE ET SOBRIÉTÉ) --- */
-.hub-container {
-    display: flex;
-    gap: 15px;
+/* --- MODULES EN BÉTON COULÉ --- */
+.concrete-module {
     margin-bottom: 5rem;
 }
-.stream-card {
-    flex: 1;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-dark);
-    padding: 25px;
+.module-meta {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    transition: border-color 0.3s var(--transition-clean), background-color 0.3s var(--transition-clean);
+    gap: 15px;
+    margin-bottom: 1.5rem;
 }
-.stream-icon {
-    font-size: 1.5rem;
-    margin-right: 25px;
-    color: var(--text-muted);
-    transition: color 0.3s var(--transition-clean), text-shadow 0.3s var(--transition-clean);
+.meta-index {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--iron-grey);
 }
-.stream-info { display: flex; flex-direction: column; flex-grow: 1; }
-.stream-brand { font-family: var(--font-serif); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-pure); }
-.stream-status { font-size: 0.55rem; color: var(--text-dim); letter-spacing: 1px; margin-top: 2px; }
-.stream-action { font-size: 0.55rem; color: var(--text-dim); border-left: 1px solid var(--border-dark); padding-left: 20px; transition: color 0.3s; }
-
-/* Interactions Streaming */
-.stream-card:hover { border-color: var(--border-bright); background-color: #0c0c0c; }
-.stream-card:hover .stream-action { color: var(--text-pure); }
-
-.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 8px rgba(29, 185, 84, 0.4); }
-.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 8px rgba(255, 0, 127, 0.4); }
-.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 8px rgba(250, 36, 60, 0.4); }
-
-/* --- GRILLE DES RÉSEAUX (ALIGNE-TOI SUR LA NORME SENIOR) --- */
-.matrix-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1px;
-    background-color: var(--border-dark); /* Crée des lignes de séparation parfaites de 1px */
-    border: 1px solid var(--border-dark);
-}
-
-.cyber-node {
-    background-color: var(--bg-surface);
-    height: 85px;
-    display: flex;
-    align-items: center;
-    padding: 0 30px;
-    gap: 20px;
-    text-decoration: none;
-    transition: background-color 0.2s var(--transition-clean);
-}
-.cyber-node i {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    transition: color 0.2s var(--transition-clean), text-shadow 0.2s var(--transition-clean);
-}
-.node-label {
-    font-family: var(--font-serif);
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    transition: color 0.2s var(--transition-clean);
-}
-
-/* Hover de la cellule */
-.cyber-node:hover { background-color: #0c0c0c; }
-.cyber-node:hover .node-label { color: var(--text-pure); }
-
-/* Allumage précis et authentique des icônes au survol */
-.cyber-node.youtube:hover i    { color: #FF0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
-.cyber-node.facebook:hover i   { color: #1877F2; text-shadow: 0 0 8px rgba(24, 119, 242, 0.5); }
-.cyber-node.instagram:hover i  { color: #E1306C; text-shadow: 0 0 8px rgba(225, 48, 108, 0.5); }
-.cyber-node.soundcloud:hover i { color: #FF5500; text-shadow: 0 0 8px rgba(255, 85, 0, 0.5); }
-.cyber-node.bandcamp:hover i   { color: #1EA0C4; text-shadow: 0 0 8px rgba(30, 160, 196, 0.5); }
-.cyber-node.mixcloud:hover i   { color: #52AAD8; text-shadow: 0 0 8px rgba(82, 170, 216, 0.5); }
-.cyber-node.hearthis:hover i   { color: #D92525; text-shadow: 0 0 8px rgba(217, 37, 37, 0.5); }
-.cyber-node.audiocom:hover i   { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
-.cyber-node.tiktok:hover i     { color: #ffffff; text-shadow: 1.5px 0 #00f2ea, -1.5px 0 #ff0050; }
-
-/* --- TERMINAL FOOTER (L'EFFET EMAIL SENIOR) --- */
-.footer-monolith {
-    text-align: center;
-    margin-top: 8rem;
-}
-.terminal-button {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid var(--border-medium);
-    padding: 3.5rem 6rem;
-    text-decoration: none;
-    background: var(--bg-surface);
-    width: 100%;
-    max-width: 650px;
-    transition: background-color 0.3s var(--transition-clean), border-color 0.3s var(--transition-clean);
-}
-.button-category {
-    font-size: 0.5rem;
-    color: var(--border-bright);
-    letter-spacing: 4px;
-    margin-bottom: 12px;
-}
-.button-title {
-    font-family: var(--font-serif);
+.meta-title {
+    font-family: var(--font-monolith);
     font-size: 1.3rem;
-    color: var(--text-pure);
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-    transition: color 0.3s var(--transition-clean);
-}
-.button-sub {
-    font-size: 0.55rem;
-    color: var(--text-dim);
-    letter-spacing: 6px;
+    letter-spacing: 4px;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
-/* L'Inversion Brutaliste au survol (Tranchant et Professionnel) */
-.terminal-button:hover {
-    background-color: var(--text-pure);
-    border-color: var(--text-pure);
+/* --- TRANSMISSION CHASSIS (HEARTHIS) --- */
+.audio-chassis {
+    background: var(--black-void);
+    border: 2px solid var(--concrete-border);
+    padding: 4px;
 }
-.terminal-button:hover .button-title { color: var(--bg-void); }
-.terminal-button:hover .button-category { color: #666666; }
-.terminal-button:hover .button-sub { color: #888888; }
 
-/* Éléments de fin de page */
-.footer-meta {
-    margin-top: 6rem;
+/* --- TRACKLIST HUB (CONCEU COMME UNE LOGIQUE DE VINYLE) --- */
+.tracklist-hub {
+    border-top: 2px solid var(--strobe-white);
+}
+.track-row {
     display: flex;
     align-items: center;
+    padding: 24px 15px;
+    border-bottom: 1px solid var(--concrete-border);
+    text-decoration: none;
+    color: var(--strobe-white);
+    transition: background-color 0.1s ease, border-bottom-color 0.1s ease;
+}
+.track-gate {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--iron-grey);
+    width: 60px;
+}
+.track-name {
+    font-family: var(--font-monolith);
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    flex-grow: 1;
+}
+.track-spec {
+    font-size: 0.7rem;
+    color: var(--iron-grey);
+    letter-spacing: 1px;
+    margin-right: 30px;
+    text-transform: uppercase;
+}
+.track-arrow {
+    font-size: 1.2rem;
+    color: var(--raw-dim);
+    transition: color 0.1s sharp, transform 0.1s ease;
+}
+
+/* Hover Tracklist brutal - Changement instantané, pas de transition molle */
+.track-row:hover {
+    background-color: var(--concrete-dark);
+    border-bottom-color: var(--strobe-white);
+}
+.track-row.spotify:hover .track-arrow { color: #1DB954; }
+.track-row.deezer:hover .track-arrow { color: #FF007F; }
+.track-row.apple:hover .track-arrow { color: #FA243C; }
+
+/* --- HEAVY GRID (FINI LES LOGOS D'ENTREPRISES SAGES) --- */
+.heavy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2px;
+    background-color: var(--concrete-border);
+    border: 2px solid var(--concrete-border);
+}
+.grid-cell {
+    background-color: var(--black-void);
+    height: 100px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    position: relative;
 }
-.horizontal-divider { height: 1px; width: 40px; background: var(--border-dark); }
-.copyright { font-size: 0.6rem; color: var(--text-dim); letter-spacing: 3px; }
-
-/* --- ARCHITECTURE MOBILE RESPONSIVE --- */
-@media (max-width: 1024px) {
-    .hub-container { flex-direction: column; gap: 10px; }
-    .hardware-module { padding: 2rem 1.5rem; }
+.grid-cell i {
+    font-size: 1.4rem;
+    color: var(--iron-grey);
+}
+.cell-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--raw-dim);
 }
 
+/* Effet "Flash Stroboscopique" au survol de la cellule */
+.grid-cell:hover { background-color: var(--concrete-dark); }
+.grid-cell:hover .cell-tag { color: var(--strobe-white); }
+
+.grid-cell.youtube:hover i    { color: #FF0000; }
+.grid-cell.facebook:hover i   { color: #1877F2; }
+.grid-cell.instagram:hover i  { color: #E1306C; }
+.grid-cell.soundcloud:hover i { color: #FF5500; }
+.grid-cell.bandcamp:hover i   { color: #1EA0C4; }
+.grid-cell.mixcloud:hover i   { color: #52AAD8; }
+.grid-cell.hearthis:hover i   { color: #D92525; }
+.grid-cell.audiocom:hover i   { color: #ffffff; }
+.grid-cell.tiktok:hover i     { color: #ffffff; text-shadow: 2px 0 #00f2ea, -2px 0 #ff0050; }
+
+/* --- FOOTER : IMPACT MAXIMUM --- */
+.monolith-footer {
+    margin-top: 8rem;
+    border-top: 2px solid var(--concrete-border);
+    padding-top: 5rem;
+    text-align: center;
+}
+.brutal-contact-block {
+    display: block;
+    background: var(--black-void);
+    border: 2px solid var(--strobe-white);
+    padding: 3rem 2rem;
+    text-decoration: none;
+    max-width: 600px;
+    margin: 0 auto;
+    transition: background-color 0.1s ease;
+}
+.brutal-action {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--iron-grey);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+.brutal-email {
+    font-family: var(--font-monolith);
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--strobe-white);
+    letter-spacing: 2px;
+}
+
+/* Inversion totale radicale */
+.brutal-contact-block:hover {
+    background-color: var(--strobe-white);
+}
+.brutal-contact-block:hover .brutal-email { color: var(--black-void); }
+.brutal-contact-block:hover .brutal-action { color: var(--iron-grey); }
+
+.system-logs {
+    margin-top: 6rem;
+    font-size: 0.55rem;
+    color: var(--raw-dim);
+    letter-spacing: 3px;
+}
+
+/* --- RESPONSIFICATION SANS CONCESSION --- */
 @media (max-width: 768px) {
-    .core-mainframe { padding: 3rem 1rem; }
-    .module-header { margin-bottom: 2rem; }
-    .matrix-grid { grid-template-columns: 1fr; }
-    .terminal-button { padding: 3rem 1rem; }
-    .button-title { font-size: 1rem; letter-spacing: 1px; }
+    .industrial-mainframe { padding: 2rem 1rem; }
+    .track-spec { display: none; }
+    .heavy-grid { grid-template-columns: 1fr 1fr; }
+    .brutal-email { font-size: 1rem; }
+    .brutal-contact-block { padding: 2rem 1rem; }
 }
