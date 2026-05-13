@@ -1,235 +1,205 @@
-/* --- BRUTAL INDUSTRIAL DESIGN TOKENS --- */
+/* --- CONFIGURATION DES MOTEURS KINÉTIQUES --- */
 :root {
-    --black-void: #000000;
-    --concrete-dark: #0a0a0a;
-    --concrete-border: #1a1a1a;
+    --void-core: #000000;
+    --industrial-grey: #080808;
+    --border-subtle: #141414;
+    --border-active: #333333;
     --strobe-white: #ffffff;
-    --iron-grey: #555555;
-    --raw-dim: #222222;
+    --dark-matte: #444444;
+    --raw-iron: #1a1a1a;
     
-    --font-industrial: 'JetBrains Mono', monospace;
-    --font-monolith: 'Cinzel', serif;
+    --font-data: 'JetBrains Mono', monospace;
+    --font-heading: 'Cinzel', serif;
+    --transition-heavy: transform 0.4s cubic-bezier(0.1, 0.8, 0.2, 1), background-color 0.3s ease;
+    --transition-flash: all 0.1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* --- CORE SYSTEMS --- */
+/* --- STRUCTURE ET PURGE --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 ::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: var(--black-void); }
-::-webkit-scrollbar-thumb { background: var(--iron-grey); }
+::-webkit-scrollbar-track { background: var(--void-core); }
+::-webkit-scrollbar-thumb { background: var(--dark-matte); }
 
 body {
-    background-color: var(--black-void);
+    background-color: var(--void-core);
     color: var(--strobe-white);
-    font-family: var(--font-industrial);
+    font-family: var(--font-data);
     overflow-x: hidden;
     -webkit-font-smoothing: grayscale;
 }
 
-/* Texture de grain argentique lourd (effet photocopie de fanzine) */
-.warehouse-noise {
+/* --- LOGIQUE DE SUB-BASS PULSE (AMBIANCE VIVANTE) --- */
+.ambient-pulse-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='heavy'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23heavy)'/%3E%3C/svg%3E");
-    opacity: 0.06; mix-blend-mode: screen; pointer-events: none; z-index: 100;
+    background: radial-gradient(circle at center, #0a0a0a 0%, var(--void-core) 80%);
+    z-index: 1; pointer-events: none;
+    animation: subBassPulse 4s infinite alternate ease-in-out;
+}
+@keyframes subBassPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.03); opacity: 1; }
 }
 
-/* --- STRUCTURE FRAMEWORK --- */
-.industrial-mainframe {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
+.industrial-grain {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05; mix-blend-mode: overlay; pointer-events: none; z-index: 99;
 }
 
-/* --- HEADER MONOLITHE --- */
-.monolith-header {
-    margin-bottom: 6rem;
-    border: 2px solid var(--concrete-border);
-    background: var(--black-void);
-}
-.raw-banner-container { position: relative; width: 100%; overflow: hidden; line-height: 0; }
-.industrial-banner { 
-    width: 100%; 
-    height: auto; 
-    filter: grayscale(1) contrast(1.3);
-}
-.shadow-cutoff {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
-    background: linear-gradient(to bottom, transparent, var(--black-void));
-}
-
-/* --- MODULES EN BÉTON COULÉ --- */
-.concrete-module {
-    margin-bottom: 5rem;
-}
-.module-meta {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 1.5rem;
-}
-.meta-index {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: var(--iron-grey);
-}
-.meta-title {
-    font-family: var(--font-monolith);
-    font-size: 1.3rem;
-    letter-spacing: 4px;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-/* --- TRANSMISSION CHASSIS (HEARTHIS) --- */
-.audio-chassis {
-    background: var(--black-void);
-    border: 2px solid var(--concrete-border);
-    padding: 4px;
-}
-
-/* --- TRACKLIST HUB (CONCEU COMME UNE LOGIQUE DE VINYLE) --- */
-.tracklist-hub {
-    border-top: 2px solid var(--strobe-white);
-}
-.track-row {
-    display: flex;
-    align-items: center;
-    padding: 24px 15px;
-    border-bottom: 1px solid var(--concrete-border);
-    text-decoration: none;
-    color: var(--strobe-white);
-    transition: background-color 0.1s ease, border-bottom-color 0.1s ease;
-}
-.track-gate {
-    font-weight: 800;
-    font-size: 0.9rem;
-    color: var(--iron-grey);
-    width: 60px;
-}
-.track-name {
-    font-family: var(--font-monolith);
-    font-size: 1.1rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    flex-grow: 1;
-}
-.track-spec {
-    font-size: 0.7rem;
-    color: var(--iron-grey);
-    letter-spacing: 1px;
-    margin-right: 30px;
-    text-transform: uppercase;
-}
-.track-arrow {
-    font-size: 1.2rem;
-    color: var(--raw-dim);
-    transition: color 0.1s sharp, transform 0.1s ease;
-}
-
-/* Hover Tracklist brutal - Changement instantané, pas de transition molle */
-.track-row:hover {
-    background-color: var(--concrete-dark);
-    border-bottom-color: var(--strobe-white);
-}
-.track-row.spotify:hover .track-arrow { color: #1DB954; }
-.track-row.deezer:hover .track-arrow { color: #FF007F; }
-.track-row.apple:hover .track-arrow { color: #FA243C; }
-
-/* --- HEAVY GRID (FINI LES LOGOS D'ENTREPRISES SAGES) --- */
-.heavy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 2px;
-    background-color: var(--concrete-border);
-    border: 2px solid var(--concrete-border);
-}
-.grid-cell {
-    background-color: var(--black-void);
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    position: relative;
-}
-.grid-cell i {
-    font-size: 1.4rem;
-    color: var(--iron-grey);
-}
-.cell-tag {
+/* --- TICKER CONTINU (FLUX CINÉTIQUE CONSTANT) --- */
+.kinetic-ticker {
+    background: var(--strobe-white);
+    color: var(--void-core);
     font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--raw-dim);
-}
-
-/* Effet "Flash Stroboscopique" au survol de la cellule */
-.grid-cell:hover { background-color: var(--concrete-dark); }
-.grid-cell:hover .cell-tag { color: var(--strobe-white); }
-
-.grid-cell.youtube:hover i    { color: #FF0000; }
-.grid-cell.facebook:hover i   { color: #1877F2; }
-.grid-cell.instagram:hover i  { color: #E1306C; }
-.grid-cell.soundcloud:hover i { color: #FF5500; }
-.grid-cell.bandcamp:hover i   { color: #1EA0C4; }
-.grid-cell.mixcloud:hover i   { color: #52AAD8; }
-.grid-cell.hearthis:hover i   { color: #D92525; }
-.grid-cell.audiocom:hover i   { color: #ffffff; }
-.grid-cell.tiktok:hover i     { color: #ffffff; text-shadow: 2px 0 #00f2ea, -2px 0 #ff0050; }
-
-/* --- FOOTER : IMPACT MAXIMUM --- */
-.monolith-footer {
-    margin-top: 8rem;
-    border-top: 2px solid var(--concrete-border);
-    padding-top: 5rem;
-    text-align: center;
-}
-.brutal-contact-block {
-    display: block;
-    background: var(--black-void);
-    border: 2px solid var(--strobe-white);
-    padding: 3rem 2rem;
-    text-decoration: none;
-    max-width: 600px;
-    margin: 0 auto;
-    transition: background-color 0.1s ease;
-}
-.brutal-action {
-    display: block;
-    font-size: 0.6rem;
-    color: var(--iron-grey);
-    letter-spacing: 4px;
-    margin-bottom: 8px;
-}
-.brutal-email {
-    font-family: var(--font-monolith);
-    font-size: 1.4rem;
     font-weight: 900;
-    color: var(--strobe-white);
-    letter-spacing: 2px;
-}
-
-/* Inversion totale radicale */
-.brutal-contact-block:hover {
-    background-color: var(--strobe-white);
-}
-.brutal-contact-block:hover .brutal-email { color: var(--black-void); }
-.brutal-contact-block:hover .brutal-action { color: var(--iron-grey); }
-
-.system-logs {
-    margin-top: 6rem;
-    font-size: 0.55rem;
-    color: var(--raw-dim);
     letter-spacing: 3px;
+    padding: 8px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 50;
+    border-bottom: 2px solid var(--strobe-white);
+}
+.ticker-wrap {
+    display: flex;
+    width: max-content;
+    animation: infiniteScroll 25s linear infinite;
+}
+.ticker-wrap span { padding-right: 50px; }
+@keyframes infiniteScroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
 }
 
-/* --- RESPONSIFICATION SANS CONCESSION --- */
+/* --- CORE MAIN FRAME --- */
+.kinetic-mainframe {
+    width: 100%; max-width: 1100px;
+    margin: 0 auto; padding: 6rem 1.5rem;
+    position: relative; z-index: 10;
+}
+
+/* Éléments cibles de la physique 3D par script */
+.tilt-target {
+    transition: var(--transition-heavy);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* --- BANNIÈRE REACTIVE --- */
+.monolith-header {
+    margin-bottom: 5rem;
+    border: 2px solid var(--border-subtle);
+    background: var(--void-core);
+    box-shadow: 0 30px 100px rgba(0,0,0,0.9);
+}
+.banner-viewport { position: relative; width: 100%; overflow: hidden; line-height: 0; }
+.fluid-banner { 
+    width: 100%; height: auto; 
+    filter: grayscale(1) contrast(1.25);
+    transition: filter 0.4s ease;
+}
+.monolith-header:hover .fluid-banner { filter: grayscale(0.2) contrast(1.15); }
+.darkness-shroud {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to bottom, transparent, var(--void-core));
+}
+
+/* --- SECTIONS BRUTALISTES --- */
+.brutal-section { margin-bottom: 6rem; }
+.section-indicator {
+    font-size: 0.75rem; font-weight: 700; color: var(--dark-matte);
+    margin-bottom: 1.5rem; letter-spacing: 3px; display: flex; align-items: center; gap: 10px;
+}
+.pulse-dot {
+    width: 6px; height: 6px; background-color: var(--strobe-white);
+    border-radius: 50%; display: inline-block;
+    animation: indicatorFlash 1s infinite alternate;
+}
+@keyframes indicatorFlash { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+
+/* --- KINETIC AUDIO TRACKLIST (EFFET DE COULISSEMENT LOURD) --- */
+.kinetic-list { border-top: 1px solid var(--border-subtle); }
+.kinetic-row {
+    display: flex; align-items: center; padding: 30px 20px;
+    border-bottom: 1px solid var(--border-subtle); text-decoration: none;
+    color: var(--strobe-white); position: relative; overflow: hidden;
+}
+.row-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--strobe-white); transform: translateY(101%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1;
+}
+.row-num { font-size: 0.8rem; font-weight: 900; color: var(--dark-matte); width: 80px; position: relative; z-index: 2; transition: var(--transition-flash); }
+.row-title { font-family: var(--font-heading); font-size: 1.3rem; letter-spacing: 3px; font-weight: 900; flex-grow: 1; position: relative; z-index: 2; transition: var(--transition-flash); }
+.row-meta { font-size: 0.65rem; color: var(--dark-matte); letter-spacing: 2px; margin-right: 40px; position: relative; z-index: 2; transition: var(--transition-flash); }
+.row-icon { font-size: 1.3rem; color: var(--raw-iron); position: relative; z-index: 2; transition: var(--transition-flash); }
+
+/* Hover physique de ligne (Inversion instantanée et violente) */
+.kinetic-row:hover .row-bg { transform: translateY(0); }
+.kinetic-row:hover .row-title, .kinetic-row:hover .row-num, .kinetic-row:hover .row-meta { color: var(--void-core); }
+.kinetic-row.spotify:hover .row-icon { color: #1DB954; }
+.kinetic-row.deezer:hover .row-icon { color: #FF007F; }
+.kinetic-row.apple:hover .row-icon { color: #FA243C; }
+
+/* --- HARDWARE AUDIO DISPLAY --- */
+.audio-hardware-frame {
+    background: #000; border: 2px solid var(--border-subtle); padding: 4px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+}
+
+/* --- KINETIC MATRIX GRID (BLOCS REVOLUTIONNAIRES INTERACTIFS) --- */
+.kinetic-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px; background-color: var(--border-subtle); border: 1px solid var(--border-subtle);
+}
+.grid-item {
+    background-color: var(--industrial-grey); height: 110px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 12px; text-decoration: none; transition: var(--transition-flash);
+}
+.grid-item i { font-size: 1.5rem; color: var(--dark-matte); transition: var(--transition-flash); }
+.item-name { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; color: var(--raw-iron); transition: var(--transition-flash); }
+
+/* Allumage stroboscopique des cellules de la matrice */
+.grid-item:hover { background-color: var(--strobe-white); }
+.grid-item:hover .item-name { color: var(--void-core); font-weight: 900; }
+
+.grid-item.youtube:hover i    { color: #FF0000; }
+.grid-item.facebook:hover i   { color: #1877F2; }
+.grid-item.instagram:hover i  { color: #E1306C; }
+.grid-item.soundcloud:hover i { color: #FF5500; }
+.grid-item.bandcamp:hover i   { color: #1EA0C4; }
+.grid-item.mixcloud:hover i   { color: #52AAD8; }
+.grid-item.hearthis:hover i   { color: #D92525; }
+.grid-item.audiocom:hover i   { color: #000000; }
+.grid-item.tiktok:hover i     { color: #000000; text-shadow: 1.5px 1.5px #00f2ea, -1.5px -1.5px #ff0050; }
+
+/* --- BLOC DE CONTACT MONOLITHIQUE (LOURD ET INTERACTIF) --- */
+.monolith-footer { text-align: center; margin-top: 6rem; padding-top: 4rem; border-top: 1px solid var(--border-subtle); }
+.brutal-interactive-box {
+    display: block; background: var(--industrial-grey); border: 2px solid var(--border-subtle);
+    padding: 4rem 2rem; text-decoration: none; max-width: 650px; margin: 0 auto;
+    transition: var(--transition-heavy);
+}
+.box-label { display: block; font-size: 0.55rem; color: var(--raw-iron); letter-spacing: 5px; margin-bottom: 12px; }
+.box-core { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; color: var(--strobe-white); letter-spacing: 2px; }
+.box-sub { display: block; font-size: 0.55rem; color: var(--dark-matte); letter-spacing: 4px; margin-top: 12px; }
+
+/* Mutation physique globale au survol */
+.brutal-interactive-box:hover {
+    background-color: var(--strobe-white); border-color: var(--strobe-white);
+    transform: scale(1.02); box-shadow: 0 30px 90px rgba(255,255,255,0.05);
+}
+.brutal-interactive-box:hover .box-core { color: var(--void-core); }
+.brutal-interactive-box:hover .box-label, .brutal-interactive-box:hover .box-sub { color: #666666; }
+
+.meta-coordinates { margin-top: 5rem; font-size: 0.55rem; color: var(--raw-iron); letter-spacing: 3px; }
+
+/* --- RESPONSIVE ARCHITECTURE --- */
 @media (max-width: 768px) {
-    .industrial-mainframe { padding: 2rem 1rem; }
-    .track-spec { display: none; }
-    .heavy-grid { grid-template-columns: 1fr 1fr; }
-    .brutal-email { font-size: 1rem; }
-    .brutal-contact-block { padding: 2rem 1rem; }
+    .kinetic-mainframe { padding: 3rem 1rem; }
+    .row-meta { display: none; }
+    .row-title { font-size: 1.1rem; }
+    .kinetic-grid { grid-template-columns: 1fr 1fr; }
+    .box-core { font-size: 1rem; }
+    .tilt-target { transform: none !important; } /* Désactivé sur mobile pour préserver la performance tactile */
 }
