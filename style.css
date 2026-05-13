@@ -7,6 +7,8 @@
     --text-low: #555555;
     --font-data: 'JetBrains Mono', monospace;
     --font-display: 'Cinzel', serif;
+    /* AJOUT DE LA VARIABLE MANQUANTE POUR LES ANIMATIONS */
+    --ease-elite: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::-webkit-scrollbar { width: 4px; }
@@ -58,7 +60,7 @@ body {
 
 .core-mainframe {
     width: 100%; 
-    max-width: 1600px; /* Largeur optimale pour Ultrawide */
+    max-width: 1600px; 
     margin: 0 auto;
     padding: 4rem 2rem; 
     position: relative; z-index: 10;
@@ -142,8 +144,6 @@ body {
     padding: 5px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 
-
-
 /* --- STREAMING HUB (DESIGN PRO) --- */
 .streaming-hub {
     margin-bottom: 4rem;
@@ -208,7 +208,7 @@ body {
     transition: 0.3s;
 }
 
-/* Hover Effects */
+/* Hover Effects Streaming */
 .stream-card:hover {
     background: rgba(255, 255, 255, 0.07);
     border-color: #444;
@@ -224,96 +224,7 @@ body {
     border-color: #444;
 }
 
-/* --- REACTIVE HOVER EFFECTS : SOCIAL LINKS --- */
-
-/* YouTube -> Rouge */
-.cyber-node.youtube:hover {
-    border-color: #FF0000;
-    color: #FF0000;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
-}
-.cyber-node.youtube:hover i { color: #FF0000; }
-
-/* Facebook -> Bleu */
-.cyber-node.facebook:hover {
-    border-color: #1877F2;
-    color: #1877F2;
-    box-shadow: 0 0 15px rgba(24, 119, 242, 0.15);
-}
-.cyber-node.facebook:hover i { color: #1877F2; }
-
-/* Instagram -> Rose/Magenta */
-.cyber-node.instagram:hover {
-    border-color: #E1306C;
-    color: #E1306C;
-    box-shadow: 0 0 15px rgba(225, 48, 108, 0.15);
-}
-.cyber-node.instagram:hover i { color: #E1306C; }
-
-/* TikTok -> Cyan Néon */
-.cyber-node.tiktok:hover {
-    border-color: #00f2ff;
-    color: #00f2ff;
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
-}
-.cyber-node.tiktok:hover i { color: #00f2ff; }
-
-/* SoundCloud -> Orange */
-.cyber-node.soundcloud:hover {
-    border-color: #FF5500;
-    color: #FF5500;
-    box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
-}
-.cyber-node.soundcloud:hover i { color: #FF5500; }
-
-/* Bandcamp -> Cyan Sourd */
-.cyber-node.bandcamp:hover {
-    border-color: #1EA0C4;
-    color: #1EA0C4;
-    box-shadow: 0 0 15px rgba(30, 160, 196, 0.15);
-}
-.cyber-node.bandcamp:hover i { color: #1EA0C4; }
-
-/* Mixcloud -> Bleu Azur */
-.cyber-node.mixcloud:hover {
-    border-color: #52AAD8;
-    color: #52AAD8;
-    box-shadow: 0 0 15px rgba(82, 170, 216, 0.15);
-}
-.cyber-node.mixcloud:hover i { color: #52AAD8; }
-
-/* Hearthis -> Jaune */
-.cyber-node.hearthis:hover {
-    border-color: #ffaa00;
-    color: #ffaa00;
-    box-shadow: 0 0 15px rgba(255, 170, 0, 0.15);
-}
-.cyber-node.hearthis:hover i { color: #ffaa00; }
-
-/* Audio.com -> Blanc Éclatant */
-.cyber-node.audiocom:hover {
-    border-color: #ffffff;
-    color: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-.cyber-node.audiocom:hover i { color: #ffffff; }
-
-/* Responsive Mobile */
-@media (max-width: 1024px) {
-    .hub-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .stream-card {
-        width: 100%;
-        max-width: 500px;
-    }
-
-    
-}
-
 /* --- GRID & NODES --- */
-
 .matrix-grid {
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -324,7 +235,7 @@ body {
     background: var(--surface); border: 1px solid var(--steel);
     height: 90px; display: flex; align-items: center; padding: 0 40px;
     gap: 25px; text-decoration: none; color: var(--text-low);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s var(--ease-elite);
     position: relative;
 }
 
@@ -336,14 +247,79 @@ body {
 .cyber-node i { font-size: 1.4rem; transition: 0.3s; }
 .node-label { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4px; }
 
+/* HOVER DE BASE (S'applique si aucune couleur spécifique n'est définie) */
 .cyber-node:hover {
     background: #111; color: #fff; border-color: #666;
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-/* --- FOOTER --- */
+/* --- REACTIVE HOVER EFFECTS : SOCIAL LINKS --- */
 
+.cyber-node.youtube:hover {
+    border-color: #FF0000;
+    color: #FF0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+}
+.cyber-node.youtube:hover i { color: #FF0000; }
+
+.cyber-node.facebook:hover {
+    border-color: #1877F2;
+    color: #1877F2;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.15);
+}
+.cyber-node.facebook:hover i { color: #1877F2; }
+
+.cyber-node.instagram:hover {
+    border-color: #E1306C;
+    color: #E1306C;
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.15);
+}
+.cyber-node.instagram:hover i { color: #E1306C; }
+
+.cyber-node.tiktok:hover {
+    border-color: #00f2ff;
+    color: #00f2ff;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+}
+.cyber-node.tiktok:hover i { color: #00f2ff; }
+
+.cyber-node.soundcloud:hover {
+    border-color: #FF5500;
+    color: #FF5500;
+    box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+}
+.cyber-node.soundcloud:hover i { color: #FF5500; }
+
+.cyber-node.bandcamp:hover {
+    border-color: #1EA0C4;
+    color: #1EA0C4;
+    box-shadow: 0 0 15px rgba(30, 160, 196, 0.15);
+}
+.cyber-node.bandcamp:hover i { color: #1EA0C4; }
+
+.cyber-node.mixcloud:hover {
+    border-color: #52AAD8;
+    color: #52AAD8;
+    box-shadow: 0 0 15px rgba(82, 170, 216, 0.15);
+}
+.cyber-node.mixcloud:hover i { color: #52AAD8; }
+
+.cyber-node.hearthis:hover {
+    border-color: #ffaa00;
+    color: #ffaa00;
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.15);
+}
+.cyber-node.hearthis:hover i { color: #ffaa00; }
+
+.cyber-node.audiocom:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+.cyber-node.audiocom:hover i { color: #ffffff; }
+
+/* --- FOOTER --- */
 .footer-monolith { text-align: center; margin: 10rem 0 4rem; }
 
 .override-button {
@@ -369,6 +345,20 @@ body {
 }
 .footer-details .line { height: 1px; width: 100px; background: var(--steel); }
 .footer-details p { font-size: 0.65rem; color: var(--text-low); letter-spacing: 4px; }
+
+/* =========================================
+   RESPONSIVE MOBILE (TOUJOURS A LA FIN)
+========================================= */
+@media (max-width: 1024px) {
+    .hub-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .stream-card {
+        width: 100%;
+        max-width: 500px;
+    }
+}
 
 @media (max-width: 768px) {
     .core-mainframe { padding: 2rem 1rem; }
