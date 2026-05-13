@@ -284,9 +284,13 @@ body {
     text-shadow: 0 0 15px rgba(225, 48, 108, 0.6); 
 }
 
+/* Correction TikTok : Effet Glitch (Cyan + Rose/Rouge) */
 .cyber-node.tiktok:hover i { 
-    color: #00f2ff; 
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.6); 
+    color: #ffffff; 
+    text-shadow: 
+        2px 0px 0px #00f2ea, 
+        -2px 0px 0px #ff0050, 
+        0 0 10px rgba(255, 255, 255, 0.4); 
 }
 
 .cyber-node.soundcloud:hover i { 
@@ -304,14 +308,16 @@ body {
     text-shadow: 0 0 15px rgba(82, 170, 216, 0.6); 
 }
 
+/* Correction Hearthis : Rouge brique vif de la marque */
 .cyber-node.hearthis:hover i { 
-    color: #ffaa00; 
-    text-shadow: 0 0 15px rgba(255, 170, 0, 0.6); 
+    color: #D92525; 
+    text-shadow: 0 0 15px rgba(217, 37, 37, 0.6); 
 }
 
+/* Correction Audio.com : Noyau blanc + Halo digital bleuté */
 .cyber-node.audiocom:hover i { 
     color: #ffffff; 
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); 
+    text-shadow: 0 0 10px #ffffff, 0 0 25px rgba(0, 120, 255, 0.8); 
 }
 
 /* --- FOOTER --- */
