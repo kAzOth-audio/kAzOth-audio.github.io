@@ -224,6 +224,80 @@ body {
     border-color: #444;
 }
 
+/* --- REACTIVE HOVER EFFECTS : SOCIAL LINKS --- */
+
+/* YouTube -> Rouge */
+.cyber-node.youtube:hover {
+    border-color: #FF0000;
+    color: #FF0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+}
+.cyber-node.youtube:hover i { color: #FF0000; }
+
+/* Facebook -> Bleu */
+.cyber-node.facebook:hover {
+    border-color: #1877F2;
+    color: #1877F2;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.15);
+}
+.cyber-node.facebook:hover i { color: #1877F2; }
+
+/* Instagram -> Rose/Magenta */
+.cyber-node.instagram:hover {
+    border-color: #E1306C;
+    color: #E1306C;
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.15);
+}
+.cyber-node.instagram:hover i { color: #E1306C; }
+
+/* TikTok -> Cyan Néon */
+.cyber-node.tiktok:hover {
+    border-color: #00f2ff;
+    color: #00f2ff;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+}
+.cyber-node.tiktok:hover i { color: #00f2ff; }
+
+/* SoundCloud -> Orange */
+.cyber-node.soundcloud:hover {
+    border-color: #FF5500;
+    color: #FF5500;
+    box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+}
+.cyber-node.soundcloud:hover i { color: #FF5500; }
+
+/* Bandcamp -> Cyan Sourd */
+.cyber-node.bandcamp:hover {
+    border-color: #1EA0C4;
+    color: #1EA0C4;
+    box-shadow: 0 0 15px rgba(30, 160, 196, 0.15);
+}
+.cyber-node.bandcamp:hover i { color: #1EA0C4; }
+
+/* Mixcloud -> Bleu Azur */
+.cyber-node.mixcloud:hover {
+    border-color: #52AAD8;
+    color: #52AAD8;
+    box-shadow: 0 0 15px rgba(82, 170, 216, 0.15);
+}
+.cyber-node.mixcloud:hover i { color: #52AAD8; }
+
+/* Hearthis -> Jaune */
+.cyber-node.hearthis:hover {
+    border-color: #ffaa00;
+    color: #ffaa00;
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.15);
+}
+.cyber-node.hearthis:hover i { color: #ffaa00; }
+
+/* Audio.com -> Blanc Éclatant */
+.cyber-node.audiocom:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+.cyber-node.audiocom:hover i { color: #ffffff; }
+
 /* Responsive Mobile */
 @media (max-width: 1024px) {
     .hub-container {
