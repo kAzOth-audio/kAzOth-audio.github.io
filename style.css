@@ -21,10 +21,18 @@ body {
     color: var(--text-high);
     font-family: var(--font-data);
     overflow-x: hidden;
-    background-image: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
 }
 
-/* --- AMBIANCE & MOUVEMENTS --- */
+/* --- EFFETS DOOM / ATMOSPHERE --- */
+
+/* Scanlines industrielles */
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none; z-index: 101;
+}
 
 .analog-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -55,336 +63,150 @@ body {
     pointer-events: none; z-index: 99;
 }
 
-/* --- LAYOUT ULTRAWIDE --- */
+/* Animation de texte instable (Glitch) */
+.glitch-text {
+    position: relative;
+}
+.glitch-text:before {
+    content: attr(data-text);
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+    color: #fff; opacity: 0.5;
+    animation: flicker 4s infinite;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 0; transform: translateX(0); }
+    20%, 24%, 55% { opacity: 0.5; transform: translateX(2px); }
+}
+
+/* --- LAYOUT --- */
 
 .core-mainframe {
-    width: 100%; 
-    max-width: 1600px; 
-    margin: 0 auto;
-    padding: 4rem 2rem; 
-    position: relative; z-index: 10;
+    width: 100%; max-width: 1600px; margin: 0 auto;
+    padding: 4rem 2rem; position: relative; z-index: 10;
 }
 
-.hero-monolith { 
-    margin-bottom: 6rem; 
-    overflow: hidden; 
-    border: 1px solid var(--steel);
-}
+.hero-monolith { margin-bottom: 6rem; border: 1px solid var(--steel); background: #000; }
 
-.banner-wrap {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
+.banner-wrap { position: relative; width: 100%; overflow: hidden; line-height: 0; }
 
 .apex-banner { 
-    width: 100%; 
-    height: auto; 
+    width: 100%; height: auto; 
+    filter: grayscale(0.2) contrast(1.2);
     animation: breathe 20s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
     from { transform: scale(1); }
-    to { transform: scale(1.08); }
+    to { transform: scale(1.05); }
 }
 
 .banner-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent 80%, var(--void));
+    background: linear-gradient(to bottom, transparent 60%, var(--void));
 }
 
 /* --- MODULES --- */
 
 .hardware-module { 
-    margin-bottom: 8rem; 
-    position: relative; 
-    padding: 30px;
-    border-left: 1px solid var(--steel);
-    border-right: 1px solid var(--steel);
-    background: rgba(255,255,255,0.01);
+    margin-bottom: 8rem; position: relative; padding: 40px;
+    border: 1px solid var(--steel);
+    background: rgba(5,5,5,0.8);
+    backdrop-filter: blur(5px);
 }
 
-.reveal {
-    animation: fadeInUp 1.5s ease-out forwards;
-}
+.reveal { animation: fadeInUp 1.5s ease-out forwards; }
 
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.ornament {
-    position: absolute; width: 20px; height: 20px;
-    border: 2px solid var(--steel-bright);
-}
-.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
-.top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+.ornament { position: absolute; width: 30px; height: 30px; border: 1px solid var(--steel-bright); }
+.top-left { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.top-right { top: -1px; right: -1px; border-left: none; border-bottom: none; }
 
-.module-header {
-    display: flex; align-items: center; gap: 15px;
-    margin-bottom: 3rem;
-}
+.module-header { display: flex; align-items: center; gap: 20px; margin-bottom: 3rem; }
 
 .industrial-tag {
-    background: var(--steel-bright); color: #fff;
-    font-size: 0.6rem; padding: 4px 12px; font-weight: 700;
+    background: #fff; color: #000;
+    font-size: 0.55rem; padding: 2px 10px; font-weight: 900;
     letter-spacing: 2px;
 }
 
 .module-title {
-    font-family: var(--font-display); font-size: 1.4rem;
-    letter-spacing: 6px; color: var(--text-high);
-    text-transform: uppercase;
+    font-family: var(--font-display); font-size: 1.2rem;
+    letter-spacing: 8px; color: var(--text-high); text-transform: uppercase;
 }
 
 .deck-chassis {
-    background: #000; border: 1px solid var(--steel-bright);
-    padding: 5px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    background: #000; border: 1px solid #111;
+    padding: 2px; box-shadow: 0 0 50px rgba(0,0,0,1);
 }
 
-/* --- STREAMING HUB (DESIGN PRO) --- */
-.streaming-hub {
-    margin-bottom: 4rem;
-    padding: 0 20px;
-}
-
-.hub-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
+/* --- STREAMING CARDS --- */
+.hub-container { display: flex; gap: 20px; }
 
 .stream-card {
-    flex: 1;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid #222;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: all 0.3s var(--ease-elite);
-    position: relative;
-    overflow: hidden;
+    flex: 1; background: #050505; border: 1px solid var(--steel);
+    padding: 25px; display: flex; align-items: center; text-decoration: none;
+    transition: all 0.4s var(--ease-elite);
 }
 
-.stream-icon {
-    font-size: 2rem;
-    margin-right: 20px;
-    color: var(--text-low);
-    transition: 0.3s;
-}
+.stream-icon { font-size: 1.8rem; margin-right: 20px; color: var(--text-low); transition: 0.3s; }
+.stream-brand { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 2px; color: #fff; }
+.stream-status { font-size: 0.55rem; color: #333; letter-spacing: 1px; margin-top: 4px; }
+.stream-action { font-size: 0.55rem; color: #333; border-left: 1px solid var(--steel); padding-left: 20px; transition: 0.3s; }
 
-.stream-info {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
+.stream-card:hover { border-color: #444; background: #0a0a0a; transform: translateY(-3px); }
+.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 15px #1DB954; }
+.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 15px #FF007F; }
+.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 15px #FA243C; }
 
-.stream-brand {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    color: var(--text-high);
-}
-
-.stream-status {
-    font-size: 0.6rem;
-    color: #444;
-    letter-spacing: 1px;
-    margin-top: 4px;
-}
-
-.stream-action {
-    font-size: 0.6rem;
-    letter-spacing: 1px;
-    color: #444;
-    border-left: 1px solid #222;
-    padding-left: 15px;
-    transition: 0.3s;
-}
-
-.stream-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: #444;
-    transform: translateY(-2px);
-}
-
-.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
-.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
-.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 15px rgba(250, 36, 60, 0.5); }
-
-.stream-card:hover .stream-action {
-    color: var(--text-high);
-    border-color: #444;
-}
-
-/* --- GRID & NODES --- */
-.matrix-grid {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 15px;
-}
+/* --- GRID NODES --- */
+.matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
 
 .cyber-node {
-    background: var(--surface); border: 1px solid var(--steel);
-    height: 90px; display: flex; align-items: center; padding: 0 40px;
-    gap: 25px; text-decoration: none; color: var(--text-low);
-    transition: all 0.4s var(--ease-elite);
-    position: relative;
+    background: #050505; border: 1px solid #111; height: 80px;
+    display: flex; align-items: center; padding: 0 30px; gap: 20px;
+    text-decoration: none; position: relative; transition: 0.3s;
 }
 
-.node-corner {
-    position: absolute; top: 0; left: 0; width: 6px; height: 6px;
-    background: var(--steel-bright); opacity: 0.5;
-}
+.node-label { font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 3px; color: var(--text-low); transition: 0.3s; }
+.cyber-node i { font-size: 1.2rem; color: var(--text-low); transition: 0.4s; }
 
-.cyber-node i { 
-    font-size: 1.4rem; 
-    transition: all 0.4s var(--ease-elite); 
-}
+.cyber-node:hover { border-color: #333; background: #080808; }
+.cyber-node:hover .node-label { color: #fff; }
 
-.node-label { 
-    font-family: var(--font-display); 
-    font-size: 0.85rem; 
-    letter-spacing: 4px; 
-    transition: color 0.4s var(--ease-elite);
-}
-
-/* HOVER DE BASE POUR LA CASE (Noir profond, légère élévation, bordure neutre) */
-.cyber-node:hover {
-    background: #111; 
-    border-color: #333;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-}
-
-/* Le texte devient blanc au survol */
-.cyber-node:hover .node-label {
-    color: var(--text-high);
-}
-
-/* --- REACTIVE HOVER EFFECTS : JUSTE LES LOGOS (ICÔNES) --- */
-
-.cyber-node.youtube:hover i { 
-    color: #FF0000; 
-    text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); 
-}
-
-.cyber-node.facebook:hover i { 
-    color: #1877F2; 
-    text-shadow: 0 0 15px rgba(24, 119, 242, 0.6); 
-}
-
-.cyber-node.instagram:hover i { 
-    color: #E1306C; 
-    text-shadow: 0 0 15px rgba(225, 48, 108, 0.6); 
-}
-
-/* Correction TikTok : Effet Glitch (Cyan + Rose/Rouge) */
-.cyber-node.tiktok:hover i { 
-    color: #ffffff; 
-    text-shadow: 
-        2px 0px 0px #00f2ea, 
-        -2px 0px 0px #ff0050, 
-        0 0 10px rgba(255, 255, 255, 0.4); 
-}
-
-.cyber-node.soundcloud:hover i { 
-    color: #FF5500; 
-    text-shadow: 0 0 15px rgba(255, 85, 0, 0.6); 
-}
-
-.cyber-node.bandcamp:hover i { 
-    color: #1EA0C4; 
-    text-shadow: 0 0 15px rgba(30, 160, 196, 0.6); 
-}
-
-.cyber-node.mixcloud:hover i { 
-    color: #52AAD8; 
-    text-shadow: 0 0 15px rgba(82, 170, 216, 0.6); 
-}
-
-/* Correction Hearthis : Rouge brique vif de la marque */
-.cyber-node.hearthis:hover i { 
-    color: #D92525; 
-    text-shadow: 0 0 15px rgba(217, 37, 37, 0.6); 
-}
-
-/* Correction Audio.com : Noyau blanc + Halo digital bleuté */
-.cyber-node.audiocom:hover i { 
-    color: #ffffff; 
-    text-shadow: 0 0 10px #ffffff, 0 0 25px rgba(0, 120, 255, 0.8); 
-}
+/* RECTIFICATIONS COULEURS LOGOS */
+.cyber-node.youtube:hover i { color: #FF0000; text-shadow: 0 0 15px #FF0000; }
+.cyber-node.facebook:hover i { color: #1877F2; text-shadow: 0 0 15px #1877F2; }
+.cyber-node.instagram:hover i { color: #E1306C; text-shadow: 0 0 15px #E1306C; }
+.cyber-node.tiktok:hover i { color: #fff; text-shadow: 2px 0 #00f2ea, -2px 0 #ff0050; }
+.cyber-node.soundcloud:hover i { color: #FF5500; text-shadow: 0 0 15px #FF5500; }
+.cyber-node.bandcamp:hover i { color: #1EA0C4; text-shadow: 0 0 15px #1EA0C4; }
+.cyber-node.mixcloud:hover i { color: #52AAD8; text-shadow: 0 0 15px #52AAD8; }
+.cyber-node.hearthis:hover i { color: #D92525; text-shadow: 0 0 15px #D92525; }
+.cyber-node.audiocom:hover i { color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #0078ff; }
 
 /* --- FOOTER --- */
-.footer-monolith { text-align: center; margin: 10rem 0 4rem; }
+.footer-monolith { text-align: center; margin-top: 10rem; }
 
 .override-button {
     display: inline-flex; flex-direction: column; align-items: center;
-    border: 1px solid var(--steel-bright); padding: 4rem 6rem;
-    text-decoration: none; transition: all 0.5s var(--ease-elite); 
-    background: var(--surface);
-    position: relative;
-    overflow: hidden;
+    border: 1px solid #222; padding: 5rem;
+    text-decoration: none; transition: 0.5s; background: #030303;
 }
 
-.prime-data {
-    font-family: var(--font-display); font-size: clamp(1.1rem, 4vw, 1.6rem);
-    color: var(--text-high); margin-bottom: 12px; letter-spacing: 3px;
-    transition: text-shadow 0.5s;
-    position: relative;
-    z-index: 2;
-}
+.prime-data { font-family: var(--font-display); font-size: 1.4rem; color: #fff; letter-spacing: 5px; margin-bottom: 10px; }
+.sub-data { font-size: 0.6rem; color: #333; letter-spacing: 8px; text-transform: uppercase; }
 
-.sub-data { 
-    font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; 
-    position: relative; z-index: 2;
-    transition: color 0.5s;
-}
+.override-button:hover { border-color: #fff; box-shadow: 0 0 40px rgba(255,255,255,0.1); }
+.override-button:hover .prime-data { text-shadow: 0 0 20px #fff; }
 
-/* NOUVEL EFFET : BOUTON EMAIL */
-.override-button:hover { 
-    background: #0f0f0f; 
-    border-color: #ffffff;
-    transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
-}
+.footer-details { margin: 6rem 0; display: flex; align-items: center; justify-content: center; gap: 20px; }
+.footer-details .line { height: 1px; width: 60px; background: #111; }
+.footer-details p { font-size: 0.6rem; color: #222; letter-spacing: 5px; }
 
-.override-button:hover .prime-data {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-
-.override-button:hover .sub-data {
-    color: #aaaaaa;
-}
-
-.footer-details {
-    margin-top: 5rem; display: flex; align-items: center; justify-content: center; gap: 30px;
-}
-.footer-details .line { height: 1px; width: 100px; background: var(--steel); }
-.footer-details p { font-size: 0.65rem; color: var(--text-low); letter-spacing: 4px; }
-
-/* =========================================
-   RESPONSIVE MOBILE (TOUJOURS A LA FIN)
-========================================= */
-@media (max-width: 1024px) {
-    .hub-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .stream-card {
-        width: 100%;
-        max-width: 500px;
-    }
-}
-
-@media (max-width: 768px) {
-    .core-mainframe { padding: 2rem 1rem; }
-    .matrix-grid { grid-template-columns: 1fr; }
-    .override-button { width: 100%; padding: 4rem 1rem; }
-    .module-title { font-size: 1rem; letter-spacing: 3px; }
-}
+/* MOBILE */
+@media (max-width: 1024px) { .hub-container { flex-direction: column; } }
