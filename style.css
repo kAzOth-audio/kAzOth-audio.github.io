@@ -7,7 +7,6 @@
     --text-low: #555555;
     --font-data: 'JetBrains Mono', monospace;
     --font-display: 'Cinzel', serif;
-    /* AJOUT DE LA VARIABLE MANQUANTE POUR LES ANIMATIONS */
     --ease-elite: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -208,16 +207,15 @@ body {
     transition: 0.3s;
 }
 
-/* Hover Effects Streaming */
 .stream-card:hover {
     background: rgba(255, 255, 255, 0.07);
     border-color: #444;
     transform: translateY(-2px);
 }
 
-.stream-card.spotify:hover .stream-icon { color: #1DB954; }
-.stream-card.deezer:hover .stream-icon { color: #FF007F; }
-.stream-card.apple:hover .stream-icon { color: #FA243C; }
+.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
+.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
+.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 15px rgba(250, 36, 60, 0.5); }
 
 .stream-card:hover .stream-action {
     color: var(--text-high);
@@ -244,80 +242,77 @@ body {
     background: var(--steel-bright); opacity: 0.5;
 }
 
-.cyber-node i { font-size: 1.4rem; transition: 0.3s; }
-.node-label { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4px; }
+.cyber-node i { 
+    font-size: 1.4rem; 
+    transition: all 0.4s var(--ease-elite); 
+}
 
-/* HOVER DE BASE (S'applique si aucune couleur spécifique n'est définie) */
+.node-label { 
+    font-family: var(--font-display); 
+    font-size: 0.85rem; 
+    letter-spacing: 4px; 
+    transition: color 0.4s var(--ease-elite);
+}
+
+/* HOVER DE BASE POUR LA CASE (Noir profond, légère élévation, bordure neutre) */
 .cyber-node:hover {
-    background: #111; color: #fff; border-color: #666;
+    background: #111; 
+    border-color: #333;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
 }
 
-/* --- REACTIVE HOVER EFFECTS : SOCIAL LINKS --- */
-
-.cyber-node.youtube:hover {
-    border-color: #FF0000;
-    color: #FF0000;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+/* Le texte devient blanc au survol */
+.cyber-node:hover .node-label {
+    color: var(--text-high);
 }
-.cyber-node.youtube:hover i { color: #FF0000; }
 
-.cyber-node.facebook:hover {
-    border-color: #1877F2;
-    color: #1877F2;
-    box-shadow: 0 0 15px rgba(24, 119, 242, 0.15);
-}
-.cyber-node.facebook:hover i { color: #1877F2; }
+/* --- REACTIVE HOVER EFFECTS : JUSTE LES LOGOS (ICÔNES) --- */
 
-.cyber-node.instagram:hover {
-    border-color: #E1306C;
-    color: #E1306C;
-    box-shadow: 0 0 15px rgba(225, 48, 108, 0.15);
+.cyber-node.youtube:hover i { 
+    color: #FF0000; 
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); 
 }
-.cyber-node.instagram:hover i { color: #E1306C; }
 
-.cyber-node.tiktok:hover {
-    border-color: #00f2ff;
-    color: #00f2ff;
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+.cyber-node.facebook:hover i { 
+    color: #1877F2; 
+    text-shadow: 0 0 15px rgba(24, 119, 242, 0.6); 
 }
-.cyber-node.tiktok:hover i { color: #00f2ff; }
 
-.cyber-node.soundcloud:hover {
-    border-color: #FF5500;
-    color: #FF5500;
-    box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+.cyber-node.instagram:hover i { 
+    color: #E1306C; 
+    text-shadow: 0 0 15px rgba(225, 48, 108, 0.6); 
 }
-.cyber-node.soundcloud:hover i { color: #FF5500; }
 
-.cyber-node.bandcamp:hover {
-    border-color: #1EA0C4;
-    color: #1EA0C4;
-    box-shadow: 0 0 15px rgba(30, 160, 196, 0.15);
+.cyber-node.tiktok:hover i { 
+    color: #00f2ff; 
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.6); 
 }
-.cyber-node.bandcamp:hover i { color: #1EA0C4; }
 
-.cyber-node.mixcloud:hover {
-    border-color: #52AAD8;
-    color: #52AAD8;
-    box-shadow: 0 0 15px rgba(82, 170, 216, 0.15);
+.cyber-node.soundcloud:hover i { 
+    color: #FF5500; 
+    text-shadow: 0 0 15px rgba(255, 85, 0, 0.6); 
 }
-.cyber-node.mixcloud:hover i { color: #52AAD8; }
 
-.cyber-node.hearthis:hover {
-    border-color: #ffaa00;
-    color: #ffaa00;
-    box-shadow: 0 0 15px rgba(255, 170, 0, 0.15);
+.cyber-node.bandcamp:hover i { 
+    color: #1EA0C4; 
+    text-shadow: 0 0 15px rgba(30, 160, 196, 0.6); 
 }
-.cyber-node.hearthis:hover i { color: #ffaa00; }
 
-.cyber-node.audiocom:hover {
-    border-color: #ffffff;
-    color: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+.cyber-node.mixcloud:hover i { 
+    color: #52AAD8; 
+    text-shadow: 0 0 15px rgba(82, 170, 216, 0.6); 
 }
-.cyber-node.audiocom:hover i { color: #ffffff; }
+
+.cyber-node.hearthis:hover i { 
+    color: #ffaa00; 
+    text-shadow: 0 0 15px rgba(255, 170, 0, 0.6); 
+}
+
+.cyber-node.audiocom:hover i { 
+    color: #ffffff; 
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); 
+}
 
 /* --- FOOTER --- */
 .footer-monolith { text-align: center; margin: 10rem 0 4rem; }
@@ -325,19 +320,40 @@ body {
 .override-button {
     display: inline-flex; flex-direction: column; align-items: center;
     border: 1px solid var(--steel-bright); padding: 4rem 6rem;
-    text-decoration: none; transition: 0.5s; background: var(--surface);
+    text-decoration: none; transition: all 0.5s var(--ease-elite); 
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
 }
 
 .prime-data {
     font-family: var(--font-display); font-size: clamp(1.1rem, 4vw, 1.6rem);
     color: var(--text-high); margin-bottom: 12px; letter-spacing: 3px;
+    transition: text-shadow 0.5s;
+    position: relative;
+    z-index: 2;
 }
 
-.sub-data { font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; }
+.sub-data { 
+    font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; 
+    position: relative; z-index: 2;
+    transition: color 0.5s;
+}
 
+/* NOUVEL EFFET : BOUTON EMAIL */
 .override-button:hover { 
-    background: #000; border-color: #fff;
-    box-shadow: 0 0 50px rgba(255,255,255,0.05);
+    background: #0f0f0f; 
+    border-color: #ffffff;
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.override-button:hover .prime-data {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.override-button:hover .sub-data {
+    color: #aaaaaa;
 }
 
 .footer-details {
