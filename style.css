@@ -3,7 +3,6 @@
     --surface: #080808;
     --steel: #1a1a1a;
     --steel-bright: #444444;
-    --accent-cyan: rgba(0, 242, 255, 0.1);
     --text-high: #ffffff;
     --text-low: #555555;
     --font-data: 'JetBrains Mono', monospace;
@@ -25,7 +24,7 @@ body {
     background-image: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
 }
 
-/* --- MOTEUR VISUEL (AMBIANCE) --- */
+/* --- AMBIANCE & MOUVEMENTS --- */
 
 .analog-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -33,37 +32,14 @@ body {
     opacity: 0.08; mix-blend-mode: overlay; pointer-events: none; z-index: 100;
 }
 
-.scanlines {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-    background-size: 100% 3px, 3px 100%;
-    z-index: 101; pointer-events: none;
-}
-
-.kinetic-grid {
-    position: fixed; width: 200%; height: 200%; top: -50%; left: -50%;
-    background-image: 
-        linear-gradient(rgba(68, 68, 68, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(68, 68, 68, 0.15) 1px, transparent 1px);
-    background-size: 80px 80px;
-    transform: perspective(800px) rotateX(65deg);
-    animation: panGrid 60s linear infinite;
-    z-index: 0; opacity: 0.3; pointer-events: none;
-}
-
-@keyframes panGrid { 
-    0% { transform: perspective(800px) rotateX(65deg) translateY(0); } 
-    100% { transform: perspective(800px) rotateX(65deg) translateY(80px); } 
-}
-
 .fog-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1; pointer-events: none; opacity: 0.2;
+    z-index: 1; pointer-events: none; opacity: 0.15;
 }
 
 .fog-layer {
     position: absolute; width: 200%; height: 200%;
-    background: radial-gradient(circle, #333 0%, transparent 70%);
+    background: radial-gradient(circle, #222 0%, transparent 70%);
     animation: drift 60s linear infinite;
 }
 .layer-2 { animation-duration: 90s; animation-direction: reverse; opacity: 0.5; }
@@ -75,150 +51,340 @@ body {
 
 .vignette {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 40%, black 150%);
+    background: radial-gradient(circle, transparent 30%, black 150%);
     pointer-events: none; z-index: 99;
 }
 
-/* --- NOUVEAU LAYOUT DENSE --- */
+/* --- LAYOUT ULTRAWIDE --- */
 
 .core-mainframe {
-    width: 100%;
-    max-width: 1400px; /* On réduit un peu pour densifier */
+    width: 100%; 
+    max-width: 1600px; 
     margin: 0 auto;
-    padding: 2rem;
+    padding: 4rem 2rem; 
+    position: relative; z-index: 10;
+}
+
+.hero-monolith { 
+    margin-bottom: 6rem; 
+    overflow: hidden; 
+    border: 1px solid var(--steel);
+}
+
+.banner-wrap {
     position: relative;
-    z-index: 10;
-    /* Ajout de lignes verticales sur les côtés pour "fermer" l'espace */
-    border-left: 1px solid rgba(68, 68, 68, 0.2);
-    border-right: 1px solid rgba(68, 68, 68, 0.2);
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
 }
 
-/* On ajoute des fausses coordonnées de grille pour meubler les angles */
-.core-mainframe::before {
-    content: "SEC_ID: 089-X // GRID_ACTIVE";
-    position: absolute; top: 10px; left: -100px;
-    font-size: 0.5rem; color: var(--steel-bright);
-    writing-mode: vertical-rl;
+.apex-banner { 
+    width: 100%; 
+    height: auto; 
+    animation: breathe 20s ease-in-out infinite alternate;
 }
 
-/* --- MODULES HABILLÉS --- */
+@keyframes breathe {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+
+.banner-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, transparent 80%, var(--void));
+}
+
+/* --- MODULES --- */
 
 .hardware-module { 
-    margin-bottom: 4rem; /* On réduit l'espace vide entre les modules */
+    margin-bottom: 8rem; 
     position: relative; 
-    padding: 60px 40px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.01) 0%, transparent 100%);
-    border-top: 1px solid var(--steel);
-    border-bottom: 1px solid var(--steel);
+    padding: 30px;
+    border-left: 1px solid var(--steel);
+    border-right: 1px solid var(--steel);
+    background: rgba(255,255,255,0.01);
 }
 
-/* Ajout d'un numéro de module automatique pour "remplir" */
-.hardware-module::before {
-    content: "STRCT_MDL_0" counter(section);
-    position: absolute; top: 15px; right: 20px;
-    font-size: 0.6rem; color: var(--steel-bright);
+.reveal {
+    animation: fadeInUp 1.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ornament {
+    position: absolute; width: 20px; height: 20px;
+    border: 2px solid var(--steel-bright);
+}
+.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+.top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+
+.module-header {
+    display: flex; align-items: center; gap: 15px;
+    margin-bottom: 3rem;
+}
+
+.industrial-tag {
+    background: var(--steel-bright); color: #fff;
+    font-size: 0.6rem; padding: 4px 12px; font-weight: 700;
     letter-spacing: 2px;
 }
-body { counter-reset: section; }
-.hardware-module { counter-increment: section; }
 
-/* --- EFFET DE SOL (SOLIDE) --- */
-/* Pour que tes modules ne "flottent" pas dans le vide */
-.kinetic-grid {
-    opacity: 0.5; /* On l'affiche vraiment cette fois */
-    background-image: 
-        linear-gradient(rgba(68, 68, 68, 0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(68, 68, 68, 0.3) 1px, transparent 1px);
+.module-title {
+    font-family: var(--font-display); font-size: 1.4rem;
+    letter-spacing: 6px; color: var(--text-high);
+    text-transform: uppercase;
 }
 
-/* --- STREAMING HUB --- */
+.deck-chassis {
+    background: #000; border: 1px solid var(--steel-bright);
+    padding: 5px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
 
-.streaming-hub { margin-bottom: 4rem; padding: 0 20px; }
-.hub-container { display: flex; justify-content: center; gap: 20px; max-width: 1600px; margin: 0 auto; }
+/* --- STREAMING HUB (DESIGN PRO) --- */
+.streaming-hub {
+    margin-bottom: 4rem;
+    padding: 0 20px;
+}
+
+.hub-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
 .stream-card {
-    flex: 1; max-width: 400px; background: rgba(255, 255, 255, 0.03);
-    border: 1px solid #222; padding: 20px; display: flex;
-    align-items: center; text-decoration: none; transition: all 0.3s var(--ease-elite);
+    flex: 1;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #222;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-elite);
+    position: relative;
+    overflow: hidden;
 }
 
-.stream-icon { font-size: 2rem; margin-right: 20px; color: var(--text-low); transition: 0.3s; }
-.stream-brand { font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 2px; color: var(--text-high); }
-.stream-status { font-size: 0.6rem; color: #444; letter-spacing: 1px; margin-top: 4px; }
-.stream-action { font-size: 0.6rem; letter-spacing: 1px; color: #444; border-left: 1px solid #222; padding-left: 15px; transition: 0.3s; }
+.stream-icon {
+    font-size: 2rem;
+    margin-right: 20px;
+    color: var(--text-low);
+    transition: 0.3s;
+}
 
-.stream-card:hover { background: rgba(255, 255, 255, 0.07); border-color: #444; transform: translateY(-3px); }
+.stream-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.stream-brand {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--text-high);
+}
+
+.stream-status {
+    font-size: 0.6rem;
+    color: #444;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.stream-action {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    color: #444;
+    border-left: 1px solid #222;
+    padding-left: 15px;
+    transition: 0.3s;
+}
+
+.stream-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #444;
+    transform: translateY(-2px);
+}
+
 .stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
 .stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
 .stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 15px rgba(250, 36, 60, 0.5); }
 
-/* --- GRID & NODES --- */
+.stream-card:hover .stream-action {
+    color: var(--text-high);
+    border-color: #444;
+}
 
-.matrix-grid { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; 
+/* --- GRID & NODES --- */
+.matrix-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 15px;
 }
 
 .cyber-node {
     background: var(--surface); border: 1px solid var(--steel);
     height: 90px; display: flex; align-items: center; padding: 0 40px;
     gap: 25px; text-decoration: none; color: var(--text-low);
-    transition: all 0.4s var(--ease-elite); position: relative;
+    transition: all 0.4s var(--ease-elite);
+    position: relative;
 }
 
-.node-corner { 
-    position: absolute; top: 0; left: 0; width: 6px; height: 6px; 
-    background: var(--steel-bright); opacity: 0.5; 
+.node-corner {
+    position: absolute; top: 0; left: 0; width: 6px; height: 6px;
+    background: var(--steel-bright); opacity: 0.5;
 }
 
-.cyber-node i { font-size: 1.4rem; transition: all 0.4s var(--ease-elite); }
-.node-label { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4px; }
+.cyber-node i { 
+    font-size: 1.4rem; 
+    transition: all 0.4s var(--ease-elite); 
+}
 
-.cyber-node:hover { background: #111; border-color: #444; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.8); color: #fff; }
+.node-label { 
+    font-family: var(--font-display); 
+    font-size: 0.85rem; 
+    letter-spacing: 4px; 
+    transition: color 0.4s var(--ease-elite);
+}
 
-/* Icon Colors on Hover */
-.cyber-node.youtube:hover i { color: #FF0000; text-shadow: 0 0 15px rgba(255,0,0,0.6); }
-.cyber-node.facebook:hover i { color: #1877F2; text-shadow: 0 0 15px rgba(24,119,242,0.6); }
-.cyber-node.instagram:hover i { color: #E1306C; text-shadow: 0 0 15px rgba(225,48,108,0.6); }
-.cyber-node.tiktok:hover i { color: #fff; text-shadow: 2px 0 #00f2ea, -2px 0 #ff0050; }
-.cyber-node.soundcloud:hover i { color: #FF5500; text-shadow: 0 0 15px rgba(255,85,0,0.6); }
-.cyber-node.hearthis:hover i { color: #D92525; text-shadow: 0 0 15px rgba(217,37,37,0.6); }
+/* HOVER DE BASE POUR LA CASE (Noir profond, légère élévation, bordure neutre) */
+.cyber-node:hover {
+    background: #111; 
+    border-color: #333;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+}
+
+/* Le texte devient blanc au survol */
+.cyber-node:hover .node-label {
+    color: var(--text-high);
+}
+
+/* --- REACTIVE HOVER EFFECTS : JUSTE LES LOGOS (ICÔNES) --- */
+
+.cyber-node.youtube:hover i { 
+    color: #FF0000; 
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); 
+}
+
+.cyber-node.facebook:hover i { 
+    color: #1877F2; 
+    text-shadow: 0 0 15px rgba(24, 119, 242, 0.6); 
+}
+
+.cyber-node.instagram:hover i { 
+    color: #E1306C; 
+    text-shadow: 0 0 15px rgba(225, 48, 108, 0.6); 
+}
+
+/* Correction TikTok : Effet Glitch (Cyan + Rose/Rouge) */
+.cyber-node.tiktok:hover i { 
+    color: #ffffff; 
+    text-shadow: 
+        2px 0px 0px #00f2ea, 
+        -2px 0px 0px #ff0050, 
+        0 0 10px rgba(255, 255, 255, 0.4); 
+}
+
+.cyber-node.soundcloud:hover i { 
+    color: #FF5500; 
+    text-shadow: 0 0 15px rgba(255, 85, 0, 0.6); 
+}
+
+.cyber-node.bandcamp:hover i { 
+    color: #1EA0C4; 
+    text-shadow: 0 0 15px rgba(30, 160, 196, 0.6); 
+}
+
+.cyber-node.mixcloud:hover i { 
+    color: #52AAD8; 
+    text-shadow: 0 0 15px rgba(82, 170, 216, 0.6); 
+}
+
+/* Correction Hearthis : Rouge brique vif de la marque */
+.cyber-node.hearthis:hover i { 
+    color: #D92525; 
+    text-shadow: 0 0 15px rgba(217, 37, 37, 0.6); 
+}
+
+/* Correction Audio.com : Noyau blanc + Halo digital bleuté */
+.cyber-node.audiocom:hover i { 
+    color: #ffffff; 
+    text-shadow: 0 0 10px #ffffff, 0 0 25px rgba(0, 120, 255, 0.8); 
+}
 
 /* --- FOOTER --- */
-
 .footer-monolith { text-align: center; margin: 10rem 0 4rem; }
+
 .override-button {
     display: inline-flex; flex-direction: column; align-items: center;
     border: 1px solid var(--steel-bright); padding: 4rem 6rem;
     text-decoration: none; transition: all 0.5s var(--ease-elite); 
-    background: var(--surface); position: relative;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
 }
 
 .prime-data {
     font-family: var(--font-display); font-size: clamp(1.1rem, 4vw, 1.6rem);
     color: var(--text-high); margin-bottom: 12px; letter-spacing: 3px;
+    transition: text-shadow 0.5s;
+    position: relative;
+    z-index: 2;
 }
 
-.sub-data { font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; }
+.sub-data { 
+    font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; 
+    position: relative; z-index: 2;
+    transition: color 0.5s;
+}
 
+/* NOUVEL EFFET : BOUTON EMAIL */
 .override-button:hover { 
-    background: #0f0f0f; border-color: #fff; transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255,255,255,0.1); 
+    background: #0f0f0f; 
+    border-color: #ffffff;
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
-.footer-details { margin-top: 5rem; display: flex; align-items: center; justify-content: center; gap: 30px; }
+.override-button:hover .prime-data {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.override-button:hover .sub-data {
+    color: #aaaaaa;
+}
+
+.footer-details {
+    margin-top: 5rem; display: flex; align-items: center; justify-content: center; gap: 30px;
+}
 .footer-details .line { height: 1px; width: 100px; background: var(--steel); }
 .footer-details p { font-size: 0.65rem; color: var(--text-low); letter-spacing: 4px; }
 
-/* --- RESPONSIVE --- */
-
+/* =========================================
+   RESPONSIVE MOBILE (TOUJOURS A LA FIN)
+========================================= */
 @media (max-width: 1024px) {
-    .hub-container { flex-direction: column; align-items: center; }
-    .stream-card { width: 100%; max-width: 500px; }
+    .hub-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .stream-card {
+        width: 100%;
+        max-width: 500px;
+    }
 }
 
 @media (max-width: 768px) {
     .core-mainframe { padding: 2rem 1rem; }
     .matrix-grid { grid-template-columns: 1fr; }
     .override-button { width: 100%; padding: 4rem 1rem; }
-    .module-title { font-size: 1.1rem; letter-spacing: 3px; }
+    .module-title { font-size: 1rem; letter-spacing: 3px; }
 }
