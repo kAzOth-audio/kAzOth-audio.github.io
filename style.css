@@ -1,366 +1,203 @@
+/* --- CONFIGURATION DES COULEURS ET POLICES --- */
 :root {
     --void: #020202;
     --surface: #080808;
     --steel: #1a1a1a;
     --steel-bright: #444444;
     --text-high: #ffffff;
-    --text-low: #555555;
+    --text-low: #666666;
+    
     --font-data: 'JetBrains Mono', monospace;
     --font-display: 'Cinzel', serif;
-    --ease-elite: cubic-bezier(0.16, 1, 0.3, 1);
+    --rust-red: #8B0000;
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--void); }
 ::-webkit-scrollbar-thumb { background: var(--steel-bright); }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--void);
     color: var(--text-high);
     font-family: var(--font-data);
     overflow-x: hidden;
-    background-image: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
 }
 
-/* --- AMBIANCE & MOUVEMENTS --- */
-
-.analog-noise {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.08; mix-blend-mode: overlay; pointer-events: none; z-index: 100;
+/* --- STRUCTURE ET TEXTURE CRT / USINE (MEKANIK VIBE) --- */
+.mekanik-chassis {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
 }
 
-.fog-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1; pointer-events: none; opacity: 0.15;
+.crt-scanlines {
+    position: absolute; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 4px, 4px 100%;
+    opacity: 0.9;
 }
 
-.fog-layer {
-    position: absolute; width: 200%; height: 200%;
-    background: radial-gradient(circle, #222 0%, transparent 70%);
-    animation: drift 60s linear infinite;
+.bass-rumble-layer {
+    position: absolute; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 10%, #000000 120%);
+    animation: warehousePulse 3s infinite alternate ease-in-out;
 }
-.layer-2 { animation-duration: 90s; animation-direction: reverse; opacity: 0.5; }
-
-@keyframes drift {
-    0% { transform: translate(-25%, -25%) rotate(0deg); }
-    100% { transform: translate(0%, 0%) rotate(360deg); }
-}
-
-.vignette {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 30%, black 150%);
-    pointer-events: none; z-index: 99;
+@keyframes warehousePulse {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
 }
 
 /* --- LAYOUT ULTRAWIDE --- */
-
 .core-mainframe {
-    width: 100%; 
-    max-width: 1600px; 
-    margin: 0 auto;
-    padding: 4rem 2rem; 
-    position: relative; z-index: 10;
+    width: 100%; max-width: 1400px; margin: 0 auto;
+    padding: 4rem 2rem; position: relative; z-index: 10;
 }
 
+/* --- ANIMATION SÉISME (BASS SHAKE) SUR TOUS LES BLOCS --- */
+.rumble-target {
+    transition: transform 0.1s;
+}
+.rumble-target:hover {
+    animation: subBassShake 0.15s infinite;
+}
+@keyframes subBassShake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(1px, -1px); }
+    50% { transform: translate(-1px, 1px); }
+    75% { transform: translate(1px, 1px); }
+    100% { transform: translate(-1px, -1px); }
+}
+
+/* --- BANNIERE --- */
 .hero-monolith { 
-    margin-bottom: 6rem; 
-    overflow: hidden; 
-    border: 1px solid var(--steel);
+    margin-bottom: 6rem; overflow: hidden; border: 1px solid var(--steel);
 }
-
-.banner-wrap {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
+.banner-wrap { position: relative; width: 100%; overflow: hidden; line-height: 0; }
 .apex-banner { 
-    width: 100%; 
-    height: auto; 
-    animation: breathe 20s ease-in-out infinite alternate;
+    width: 100%; height: auto; 
+    filter: grayscale(0.5) contrast(1.2);
 }
-
-@keyframes breathe {
-    from { transform: scale(1); }
-    to { transform: scale(1.08); }
-}
-
 .banner-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent 80%, var(--void));
+    background: linear-gradient(to bottom, transparent 70%, var(--void));
 }
 
 /* --- MODULES --- */
-
 .hardware-module { 
-    margin-bottom: 8rem; 
-    position: relative; 
-    padding: 30px;
-    border-left: 1px solid var(--steel);
-    border-right: 1px solid var(--steel);
-    background: rgba(255,255,255,0.01);
+    margin-bottom: 8rem; position: relative; padding: 30px;
+    border-left: 1px solid var(--steel); border-right: 1px solid var(--steel);
+    background: rgba(5, 5, 5, 0.6);
 }
 
-.reveal {
-    animation: fadeInUp 1.5s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.ornament {
-    position: absolute; width: 20px; height: 20px;
-    border: 2px solid var(--steel-bright);
-}
+.ornament { position: absolute; width: 20px; height: 20px; border: 2px solid var(--steel-bright); }
 .top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
 .top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
 
+/* En-tête de section reproduit à l'identique de ton screenshot */
 .module-header {
-    display: flex; align-items: center; gap: 15px;
-    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 20px; margin-bottom: 3rem;
 }
-
 .industrial-tag {
     background: var(--steel-bright); color: #fff;
-    font-size: 0.6rem; padding: 4px 12px; font-weight: 700;
+    font-size: 0.65rem; padding: 4px 12px; font-weight: 700;
     letter-spacing: 2px;
 }
-
 .module-title {
-    font-family: var(--font-display); font-size: 1.4rem;
-    letter-spacing: 6px; color: var(--text-high);
-    text-transform: uppercase;
+    font-family: var(--font-display); font-size: 1.6rem;
+    letter-spacing: 6px; color: var(--text-high); text-transform: uppercase;
+    position: relative;
+}
+
+/* Effet glitch subtil sur le titre au survol du module */
+.hardware-module:hover .glitch-hover::before {
+    content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 var(--rust-red);
+    top: 0; color: var(--text-high); overflow: hidden; clip: rect(0, 900px, 0, 0); 
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim {
+    0% { clip: rect(12px, 9999px, 66px, 0); }
+    20% { clip: rect(85px, 9999px, 5px, 0); }
+    40% { clip: rect(32px, 9999px, 110px, 0); }
+    60% { clip: rect(95px, 9999px, 55px, 0); }
+    80% { clip: rect(15px, 9999px, 130px, 0); }
+    100% { clip: rect(70px, 9999px, 90px, 0); }
 }
 
 .deck-chassis {
-    background: #000; border: 1px solid var(--steel-bright);
-    padding: 5px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    background: #000; border: 1px solid var(--steel); padding: 3px;
 }
 
-/* --- STREAMING HUB (DESIGN PRO) --- */
-.streaming-hub {
-    margin-bottom: 4rem;
-    padding: 0 20px;
-}
-
-.hub-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
+/* --- STREAMING HUB --- */
+.streaming-hub { margin-bottom: 6rem; }
+.hub-container { display: flex; gap: 20px; }
 .stream-card {
-    flex: 1;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid #222;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: all 0.3s var(--ease-elite);
-    position: relative;
-    overflow: hidden;
+    flex: 1; background: var(--surface); border: 1px solid var(--steel);
+    padding: 20px; display: flex; align-items: center; text-decoration: none;
+    transition: background 0.1s ease, border-color 0.1s ease;
 }
+.stream-icon { font-size: 2rem; margin-right: 20px; color: var(--text-low); }
+.stream-info { display: flex; flex-direction: column; flex-grow: 1; }
+.stream-brand { font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 2px; color: var(--text-high); }
+.stream-status { font-size: 0.6rem; color: var(--text-low); letter-spacing: 1px; margin-top: 4px; }
+.stream-action { font-size: 0.6rem; letter-spacing: 1px; color: var(--text-low); border-left: 1px solid var(--steel); padding-left: 15px; }
 
-.stream-icon {
-    font-size: 2rem;
-    margin-right: 20px;
-    color: var(--text-low);
-    transition: 0.3s;
-}
-
-.stream-info {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.stream-brand {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    color: var(--text-high);
-}
-
-.stream-status {
-    font-size: 0.6rem;
-    color: #444;
-    letter-spacing: 1px;
-    margin-top: 4px;
-}
-
-.stream-action {
-    font-size: 0.6rem;
-    letter-spacing: 1px;
-    color: #444;
-    border-left: 1px solid #222;
-    padding-left: 15px;
-    transition: 0.3s;
-}
-
-.stream-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: #444;
-    transform: translateY(-2px);
-}
-
-.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 15px rgba(29, 185, 84, 0.5); }
-.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
-.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 15px rgba(250, 36, 60, 0.5); }
-
-.stream-card:hover .stream-action {
-    color: var(--text-high);
-    border-color: #444;
-}
+/* Survol brutal des streams */
+.stream-card:hover { background: #111; border-color: var(--text-high); }
+.stream-card:hover .stream-action { color: var(--text-high); }
+.stream-card.spotify:hover .stream-icon { color: #1DB954; text-shadow: 0 0 10px #1DB954; }
+.stream-card.deezer:hover .stream-icon { color: #FF007F; text-shadow: 0 0 10px #FF007F; }
+.stream-card.apple:hover .stream-icon { color: #FA243C; text-shadow: 0 0 10px #FA243C; }
 
 /* --- GRID & NODES --- */
 .matrix-grid {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 15px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;
 }
-
 .cyber-node {
     background: var(--surface); border: 1px solid var(--steel);
     height: 90px; display: flex; align-items: center; padding: 0 40px;
     gap: 25px; text-decoration: none; color: var(--text-low);
-    transition: all 0.4s var(--ease-elite);
-    position: relative;
+    position: relative; transition: background 0.1s ease;
 }
-
 .node-corner {
     position: absolute; top: 0; left: 0; width: 6px; height: 6px;
     background: var(--steel-bright); opacity: 0.5;
 }
+.cyber-node i { font-size: 1.4rem; transition: color 0.1s ease; }
+.node-label { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4px; transition: color 0.1s ease; }
 
-.cyber-node i { 
-    font-size: 1.4rem; 
-    transition: all 0.4s var(--ease-elite); 
-}
+/* Allumage brutal des icônes */
+.cyber-node:hover { background: #111; border-color: var(--steel-bright); }
+.cyber-node:hover .node-label { color: var(--text-high); }
 
-.node-label { 
-    font-family: var(--font-display); 
-    font-size: 0.85rem; 
-    letter-spacing: 4px; 
-    transition: color 0.4s var(--ease-elite);
-}
-
-/* HOVER DE BASE POUR LA CASE (Noir profond, légère élévation, bordure neutre) */
-.cyber-node:hover {
-    background: #111; 
-    border-color: #333;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-}
-
-/* Le texte devient blanc au survol */
-.cyber-node:hover .node-label {
-    color: var(--text-high);
-}
-
-/* --- REACTIVE HOVER EFFECTS : JUSTE LES LOGOS (ICÔNES) --- */
-
-.cyber-node.youtube:hover i { 
-    color: #FF0000; 
-    text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); 
-}
-
-.cyber-node.facebook:hover i { 
-    color: #1877F2; 
-    text-shadow: 0 0 15px rgba(24, 119, 242, 0.6); 
-}
-
-.cyber-node.instagram:hover i { 
-    color: #E1306C; 
-    text-shadow: 0 0 15px rgba(225, 48, 108, 0.6); 
-}
-
-/* Correction TikTok : Effet Glitch (Cyan + Rose/Rouge) */
-.cyber-node.tiktok:hover i { 
-    color: #ffffff; 
-    text-shadow: 
-        2px 0px 0px #00f2ea, 
-        -2px 0px 0px #ff0050, 
-        0 0 10px rgba(255, 255, 255, 0.4); 
-}
-
-.cyber-node.soundcloud:hover i { 
-    color: #FF5500; 
-    text-shadow: 0 0 15px rgba(255, 85, 0, 0.6); 
-}
-
-.cyber-node.bandcamp:hover i { 
-    color: #1EA0C4; 
-    text-shadow: 0 0 15px rgba(30, 160, 196, 0.6); 
-}
-
-.cyber-node.mixcloud:hover i { 
-    color: #52AAD8; 
-    text-shadow: 0 0 15px rgba(82, 170, 216, 0.6); 
-}
-
-/* Correction Hearthis : Rouge brique vif de la marque */
-.cyber-node.hearthis:hover i { 
-    color: #D92525; 
-    text-shadow: 0 0 15px rgba(217, 37, 37, 0.6); 
-}
-
-/* Correction Audio.com : Noyau blanc + Halo digital bleuté */
-.cyber-node.audiocom:hover i { 
-    color: #ffffff; 
-    text-shadow: 0 0 10px #ffffff, 0 0 25px rgba(0, 120, 255, 0.8); 
-}
+.cyber-node.youtube:hover i { color: #FF0000; text-shadow: 0 0 10px rgba(255,0,0,0.5); }
+.cyber-node.facebook:hover i { color: #1877F2; text-shadow: 0 0 10px rgba(24,119,242,0.5); }
+.cyber-node.instagram:hover i { color: #E1306C; text-shadow: 0 0 10px rgba(225,48,108,0.5); }
+.cyber-node.tiktok:hover i { color: #fff; text-shadow: 2px 0 #00f2ea, -2px 0 #ff0050; }
+.cyber-node.soundcloud:hover i { color: #FF5500; text-shadow: 0 0 10px rgba(255,85,0,0.5); }
+.cyber-node.bandcamp:hover i { color: #1EA0C4; text-shadow: 0 0 10px rgba(30,160,196,0.5); }
+.cyber-node.mixcloud:hover i { color: #52AAD8; text-shadow: 0 0 10px rgba(82,170,216,0.5); }
+.cyber-node.hearthis:hover i { color: #D92525; text-shadow: 0 0 10px rgba(217,37,37,0.5); }
+.cyber-node.audiocom:hover i { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
 /* --- FOOTER --- */
-.footer-monolith { text-align: center; margin: 10rem 0 4rem; }
-
+.footer-monolith { text-align: center; margin: 8rem 0 4rem; }
 .override-button {
     display: inline-flex; flex-direction: column; align-items: center;
     border: 1px solid var(--steel-bright); padding: 4rem 6rem;
-    text-decoration: none; transition: all 0.5s var(--ease-elite); 
-    background: var(--surface);
-    position: relative;
-    overflow: hidden;
+    text-decoration: none; background: var(--surface);
+    transition: background 0.1s ease, border-color 0.1s ease;
 }
-
 .prime-data {
     font-family: var(--font-display); font-size: clamp(1.1rem, 4vw, 1.6rem);
     color: var(--text-high); margin-bottom: 12px; letter-spacing: 3px;
-    transition: text-shadow 0.5s;
-    position: relative;
-    z-index: 2;
 }
+.sub-data { font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; transition: color 0.1s; }
 
-.sub-data { 
-    font-size: 0.7rem; color: var(--text-low); letter-spacing: 5px; 
-    position: relative; z-index: 2;
-    transition: color 0.5s;
-}
-
-/* NOUVEL EFFET : BOUTON EMAIL */
 .override-button:hover { 
-    background: #0f0f0f; 
-    border-color: #ffffff;
-    transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    background: var(--text-high); border-color: var(--text-high);
 }
-
-.override-button:hover .prime-data {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-
-.override-button:hover .sub-data {
-    color: #aaaaaa;
-}
+.override-button:hover .prime-data { color: var(--void); }
+.override-button:hover .sub-data { color: #333; font-weight: bold; }
 
 .footer-details {
     margin-top: 5rem; display: flex; align-items: center; justify-content: center; gap: 30px;
@@ -368,23 +205,15 @@ body {
 .footer-details .line { height: 1px; width: 100px; background: var(--steel); }
 .footer-details p { font-size: 0.65rem; color: var(--text-low); letter-spacing: 4px; }
 
-/* =========================================
-   RESPONSIVE MOBILE (TOUJOURS A LA FIN)
-========================================= */
+/* MOBILE */
 @media (max-width: 1024px) {
-    .hub-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .stream-card {
-        width: 100%;
-        max-width: 500px;
-    }
+    .hub-container { flex-direction: column; }
+    .stream-card { padding: 15px; }
 }
-
 @media (max-width: 768px) {
     .core-mainframe { padding: 2rem 1rem; }
     .matrix-grid { grid-template-columns: 1fr; }
-    .override-button { width: 100%; padding: 4rem 1rem; }
-    .module-title { font-size: 1rem; letter-spacing: 3px; }
+    .override-button { width: 100%; padding: 3rem 1rem; }
+    .module-title { font-size: 1.2rem; }
+    .rumble-target:hover { animation: none !important; }
 }
